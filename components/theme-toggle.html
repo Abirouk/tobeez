@@ -1,0 +1,41 @@
+<div class="theme-toggle-wrapper tw-relative tw-flex tw-items-center">
+    <label for="theme-toggle-checkbox" class="tw-flex tw-items-center tw-cursor-pointer">
+      <div class="tw-relative">
+        <!-- Toggle input -->
+        <input type="checkbox" id="theme-toggle-checkbox" class="tw-sr-only" />
+        
+        <!-- Track -->
+        <div class="tw-w-11 tw-h-6 tw-bg-gray-700 tw-rounded-full tw-shadow-inner"></div>
+        
+        <!-- Thumb -->
+        <div class="toggle-dot tw-absolute tw-left-1 tw-top-1 tw-w-4 tw-h-4 tw-bg-white tw-rounded-full tw-transition tw-transform tw-duration-300 tw-ease-in-out"></div>
+      </div>
+      
+      <!-- Icons (optional) -->
+      <div class="tw-flex tw-items-center tw-ml-3">
+        <span class="toggle-icon-dark">🌙</span>
+        <span class="toggle-icon-light tw-hidden">☀️</span>
+      </div>
+    </label>
+  </div>
+  
+  <style>
+    /* Toggle style */
+    input:checked ~ .toggle-dot {
+      transform: translateX(100%);
+      background-color: #FDB51B;
+    }
+    
+    input:checked ~ div .toggle-icon-dark {
+      display: none;
+    }
+    
+    input:checked ~ div .toggle-icon-light {
+      display: block;
+    }
+    
+    /* Focus styles for accessibility */
+    input:focus ~ .toggle-dot {
+      box-shadow: 0 0 0 2px #FDB51B;
+    }
+  </style>
