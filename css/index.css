@@ -15,6 +15,7 @@
     --secondary-text-color: #c7c6c6;
     --card-bg: #080808;
     --border-color: #1F2123;
+    --shadow-color: rgba(0, 0, 0, 0.25);
 
     --btn-color: #000000;/* button color*/
     --btn-bg: #FDB51B;/* button bg color*/
@@ -35,6 +36,7 @@
     --secondary-text-color: #333333;
     --card-bg: #f5f5f5;
     --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 
     /* Keep brand colors the same */
     --btn-color: #000000;
@@ -62,6 +64,18 @@ body {
     color: var(--secondary-text-color) !important;
 }
 
+/* Shadow adjustments */
+.tw-shadow-lg, .tw-shadow-md {
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 
+                0 4px 6px -4px var(--shadow-color) !important;
+}
+
+/* Light mode gradient text adjustments */
+[data-theme="light"] .gradient-text {
+    background: linear-gradient(90deg, rgba(0,0,0,0.9) 18%, rgba(253,181,27,1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 html {
     scroll-behavior: smooth;
@@ -76,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 header{
     /* background-color: #fff;
     color: #000; */
-    color: #b1b1b1;
+    color: var(--text-color);
 }
 
 
@@ -102,12 +116,12 @@ header > .collapsible-header{
     border-radius: 5px;
     padding: 5px 10px;
     transition: background-color 0.5s, color 0.5s;
+    color: var(--text-color);
 }
 
 
 .header-links:hover {
-    color: #ffffff;
-    /* background-color: var(--header-link-hover); */
+    color: var(--header-link-hover);
 }
 
 .primary-text-color{
@@ -129,7 +143,7 @@ header > .collapsible-header{
     position: relative;
 }
 
-/* 
+/* Add a gold-colored overlay to the signup section */
 .signup-img-section::after {
     content: '';
     position: absolute;
@@ -141,7 +155,7 @@ header > .collapsible-header{
     z-index: 1;
     pointer-events: none;
 }
-*/
+
 .hero-img-bg-grad{
     background: rgb(253,181,27);
     background: linear-gradient(90deg, rgba(253,181,27,0.6) 8%, rgba(253,181,27,0.4) 31%, rgba(253,181,27,0.3) 76%, rgba(253,181,27,0.2) 89%);
@@ -157,14 +171,13 @@ header > .collapsible-header{
 }
 
 .border-gradient{
-    background: rgb(219,215,213);
-    background: linear-gradient(180deg, rgba(219,215,213,1) 35%, rgba(214,211,233,0) 71%);
-    /* background-image: linear-gradient(90deg, #7e22ce91 8%, #625aafae 31%, #7badbbbc 76%, #54d2d0ca 89%); */
+    background: rgb(253,181,27);
+    background: linear-gradient(180deg, rgba(253,181,27,1) 35%, rgba(253,181,27,0) 71%);
     padding: 2px;
     border-radius: 10px;
 }
+
 .border-gradient>div{
-    /* background-color: var(--bg-color); */
     background-color: var(--bg-color);
     border-radius: inherit;
 }
@@ -191,11 +204,14 @@ header > .collapsible-header{
 }
 
 .btn:hover{
-
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
 }
 
 .btn:disabled{
     cursor: default;
+    opacity: 0.7;
 }
 
 .input{
@@ -204,7 +220,8 @@ header > .collapsible-header{
     border-radius: 5px;
     /* outline: none; */
     min-width: 100px;
-    border: 1px solid #818080;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
     /* transition: border 0.3s; */
     font-family: var(--body-font);
 }
@@ -240,12 +257,12 @@ header > .collapsible-header{
 }
 
 .footer-link{
-    color: #c7c6c6;
+    color: var(--secondary-text-color);
     transition: color 0.3s;
 }
 
 .footer-link:hover{
-    color: #fff;
+    color: var(--primary-text-color);
 }
 
 
@@ -253,7 +270,7 @@ header > .collapsible-header{
 
 .faq-accordion {
     background-color: inherit;
-    color: #f2f2f2;
+    color: var(--text-color);
     cursor: pointer;
     padding: 15px 18px;
     width: 100%;
@@ -265,7 +282,7 @@ header > .collapsible-header{
 
 .faq .content {
     padding: 0px 18px;
-    color: #e4e4e4;
+    color: var(--secondary-text-color);
     height: max-content;
     overflow: hidden;
     background-color: transparent;
@@ -274,10 +291,11 @@ header > .collapsible-header{
     transition: max-height 0.4s, padding 0.4s;
 }
 
-.faq-accordion .active,
+.faq-accordion.active,
 .faq-accordion:hover {
     color: #FDB51B;
 }
+
 .faq-accordion i {
     transition: transform 0.3s ease;
 }
@@ -285,6 +303,44 @@ header > .collapsible-header{
 .faq-accordion.active i {
     transform: rotate(45deg);
 }
+
+/* Theme toggle specific styles */
+.theme-toggle-wrapper {
+    margin: 0 10px;
+}
+
+.themeSwitcherTwo {
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.themeSwitcherTwo .light {
+    display: none;
+}
+
+.themeSwitcherTwo .dark {
+    background-color: #FDB51B;
+    color: #000;
+}
+
+/* Light mode styles */
+[data-theme="light"] .themeSwitcherTwo .dark {
+    display: none;
+}
+
+[data-theme="light"] .themeSwitcherTwo .light {
+    display: flex;
+    background-color: #FDB51B;
+    color: #000;
+}
+
+/* Set theme-specific focus styles */
+.themeSwitcherTwo:focus-within {
+    outline: 2px solid #FDB51B;
+    outline-offset: 2px;
+}
+
+/* Mobile menu styles */
 @media not all and (min-width: 1024px) {
     header .collapsible-header {
         position: fixed;
@@ -300,14 +356,32 @@ header > .collapsible-header{
         padding-top: 5%;
         padding-bottom: 5%;
         place-items: end;
-        background-color: #040404;
-        color: #ffffff;
+        background-color: var(--card-bg);
+        color: var(--text-color);
         overflow-y: auto;
-        box-shadow: 3px 0px 3px 2px #9f9f9f;
+        box-shadow: 3px 0px 3px 2px var(--shadow-color);
     }
 
     .header-links{
-        color: rgb(255, 255, 255);
+        color: var(--text-color);
     }
     
+    /* Adjust theme toggle layout on mobile */
+    .theme-toggle-wrapper {
+        margin: 15px 0;
+    }
+}
+
+/* Dark mode adjustments for images and graphics */
+[data-theme="light"] img.tw-grayscale {
+    filter: grayscale(100%) brightness(0.8);
+}
+
+[data-theme="light"] img.tw-grayscale:hover {
+    filter: grayscale(0%) brightness(1);
+}
+
+/* Ensure mobile nav button is visible in light mode */
+[data-theme="light"] #collapse-btn {
+    color: var(--text-color);
 }

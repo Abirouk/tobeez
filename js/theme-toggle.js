@@ -4,9 +4,15 @@
 function setTheme(themeName) {
     document.documentElement.setAttribute('data-theme', themeName);
     localStorage.setItem('theme', themeName);
+    
+    // Update checkbox state based on the theme
+    const themeToggle = document.getElementById('themeSwitcherOne');
+    if (themeToggle) {
+        themeToggle.checked = (themeName === 'light');
+    }
 }
 
-// Function to toggle theme
+// Toggle theme function
 function toggleTheme() {
     const currentTheme = localStorage.getItem('theme') || 'dark';
     if (currentTheme === 'dark') {
@@ -14,16 +20,10 @@ function toggleTheme() {
     } else {
         setTheme('dark');
     }
-    
-    // Update toggle UI if it exists
-    const themeToggle = document.getElementById('theme-toggle-checkbox');
-    if (themeToggle) {
-        themeToggle.checked = (currentTheme === 'dark');
-    }
 }
 
-// Initialize theme on page load
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize theme
+function initTheme() {
     // Check for saved theme preference or use preferred color scheme
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -31,12 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
         // Use saved theme
         setTheme(savedTheme);
-        
-        // Update toggle UI if it exists
-        const themeToggle = document.getElementById('theme-toggle-checkbox');
-        if (themeToggle) {
-            themeToggle.checked = (savedTheme === 'dark');
-        }
     } else if (prefersDark) {
         // Use dark theme if system prefers it
         setTheme('dark');
@@ -44,10 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Default to light theme
         setTheme('light');
     }
+}
+
+// Initialize when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
     
-    // Add event listener to theme toggle
-    const themeToggle = document.getElementById('theme-toggle-checkbox');
-    if (themeToggle) {
-        themeToggle.addEventListener('change', toggleTheme);
-    }
+    // Add event listener to the theme switch checkbox
+    document.addEventListener('componentsLoaded', function() {
+        const themeSwitch = document.getElementById('themeSwitcherOne');
+        if (themeSwitch) {
+            themeSwitch.addEventListener('change', function() {
+                toggleTheme();
+            });
+        }
+    });
 });
