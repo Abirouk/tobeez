@@ -11,12 +11,11 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#0A8DD3',
+				primary: '#FDB51B',
 				secondary: "#080808",
-				outlineColor: "#1F2123"
+				outlineColor: "#FDB51B"
 			}
 		},
 	},
 	plugins: [],
 }
-

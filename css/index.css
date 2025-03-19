@@ -11,12 +11,12 @@
 :root{
     --bg-color: #000;
 
-    --btn-color: #fdfdfd;/* button color*/
-    --btn-bg: #0A8DD3;/* button bg color*/
+    --btn-color: #000000;/* button color*/
+    --btn-bg: #FDB51B;/* button bg color*/
 
-    --primary-text-color: #0A8DD3;
-    --header-link-hover: #0A8DD3;
-    --input-hover-bd-color: #0A8DD3;
+    --primary-text-color: #FDB51B;
+    --header-link-hover: #FDB51B;
+    --input-hover-bd-color: #FDB51B;
     
     /* Font variables */
     --header-font: 'Godber', sans-serif;
@@ -76,8 +76,8 @@ header > .collapsible-header{
 }
 
 .gradient-text{
-    background: rgb(215,215,215);
-    background: linear-gradient(90deg, rgba(215,215,215,1) 18%, rgba(136,136,136,1) 71%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 18%, rgba(253,181,27,1) 71%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -90,8 +90,8 @@ header > .collapsible-header{
 }
 
 .hero-img-bg-grad{
-    background: rgb(126,34,206);
-    background: linear-gradient(90deg, #7e22ce91 8%, #625aafae 31%, #7badbbbc 76%, #54d2d0ca 89%);
+    background: rgb(253,181,27);
+    background: linear-gradient(90deg, rgba(253,181,27,0.6) 8%, rgba(253,181,27,0.4) 31%, rgba(253,181,27,0.3) 76%, rgba(253,181,27,0.2) 89%);
     filter: blur(50px);
     opacity: 0.5;
 }
@@ -223,9 +223,15 @@ header > .collapsible-header{
 
 .faq-accordion .active,
 .faq-accordion:hover {
-    /* background-color: #2e2c2c; */
+    color: #FDB51B;
+}
+.faq-accordion i {
+    transition: transform 0.3s ease;
 }
 
+.faq-accordion.active i {
+    transform: rotate(45deg);
+}
 @media not all and (min-width: 1024px) {
     header .collapsible-header {
         position: fixed;
