@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@font-face {
+    font-family: 'Godber';
+    src: url('../assets/fonts/godber.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root{
-
     --bg-color: #000;
 
     --btn-color: #fdfdfd;/* button color*/
@@ -10,12 +17,21 @@
     --primary-text-color: #0A8DD3;
     --header-link-hover: #0A8DD3;
     --input-hover-bd-color: #0A8DD3;
+    
+    /* Font variables */
+    --header-font: 'Godber', sans-serif;
+    --body-font: 'Raleway', sans-serif;
 }
 
 
 html {
     scroll-behavior: smooth;
-    font-family: "Ubuntu", sans-serif;
+    font-family: var(--body-font);
+}
+
+/* Apply header font to headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--header-font);
 }
 
 header{
@@ -118,6 +134,7 @@ header > .collapsible-header{
     align-items: center;
     display: flex;
     cursor: pointer;
+    font-family: var(--body-font);
 }
 
 .btn:hover{
@@ -136,6 +153,7 @@ header > .collapsible-header{
     min-width: 100px;
     border: 1px solid #818080;
     /* transition: border 0.3s; */
+    font-family: var(--body-font);
 }
 
 .input:active, .input:focus, .input:focus-within{
