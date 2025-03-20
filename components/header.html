@@ -24,14 +24,14 @@
         <div
             class="tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full max-md:tw-flex-col max-md:tw-place-content-center"
         >
-            <!-- Theme Toggle - Simplified direct implementation -->
-            <div class="theme-toggle-wrapper">
-                <button id="themeToggleBtn" class="theme-toggle-button tw-bg-[#FDB51B] tw-text-black tw-rounded-full tw-px-3 tw-py-1 tw-flex tw-items-center tw-gap-2">
-                    <span class="mode-text">Dark</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon dark-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Theme Toggle Button -->
+            <div class="theme-toggle-wrapper tw-relative tw-flex tw-items-center">
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="tw-bg-[#FDB51B] tw-text-black tw-rounded-full tw-px-3 tw-py-1 tw-flex tw-items-center tw-gap-2">
+                    <span id="modeText">Dark Mode</span>
+                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon light-icon tw-hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -45,7 +45,7 @@
                 </button>
             </div>
             
-            
+            <a
                 href=""
                 aria-label="signup"
                 class="tw-rounded-full tw-bg-[#FDB51B] tw-px-3 tw-py-2 tw-text-black tw-transition-transform tw-duration-[0.3s] hover:tw-translate-x-2"
@@ -62,3 +62,44 @@
         id="collapse-btn"
     ></button>
 </header>
+
+<script>
+// Update toggle button to reflect the current theme
+document.addEventListener('DOMContentLoaded', function() {
+    updateThemeToggle();
+});
+
+document.addEventListener('componentsLoaded', function() {
+    updateThemeToggle();
+});
+
+// Called when the DOM loads to update button appearance
+function updateThemeToggle() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const modeText = document.getElementById('modeText');
+    const darkIcon = document.getElementById('darkIcon');
+    const lightIcon = document.getElementById('lightIcon');
+    
+    if (currentTheme === 'light') {
+        modeText.textContent = 'Light Mode';
+        darkIcon.classList.add('tw-hidden');
+        lightIcon.classList.remove('tw-hidden');
+    } else {
+        modeText.textContent = 'Dark Mode';
+        darkIcon.classList.remove('tw-hidden');
+        lightIcon.classList.add('tw-hidden');
+    }
+}
+
+// Global toggle theme function
+window.toggleTheme = function() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeToggle();
+    
+    console.log(`Theme switched to ${newTheme}`);
+}
+</script>

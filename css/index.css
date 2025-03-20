@@ -231,3 +231,104 @@ header {
     color: var(--text-color);
     transition: color 0.3s ease;
 }
+/* Global theme transition */
+body, 
+.tw-bg-black, 
+.tw-text-white,
+.tw-text-black,
+.tw-bg-white,
+[class*="tw-bg-"],
+[class*="tw-text-"] {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme toggle styling */
+#themeToggleBtn {
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#themeToggleBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#themeToggleBtn .mode-icon {
+    transition: all 0.3s ease;
+}
+
+/* Light mode specific overrides */
+[data-theme="light"] body {
+    background-color: white;
+    color: black;
+}
+
+[data-theme="light"] .tw-bg-black {
+    background-color: white;
+}
+
+[data-theme="light"] .tw-text-white {
+    color: black;
+}
+
+[data-theme="light"] #themeToggleBtn {
+    background-color: #FDB51B;
+    color: black;
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+    #themeToggleBtn {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+}
+
+/* Header adjustments for light theme */
+[data-theme="light"] header .collapsible-header {
+    background-color: rgba(255, 255, 255, 0.9); 
+}
+
+[data-theme="light"] #collapse-btn {
+    color: black;
+}
+
+/* Fix common theme issues for specific components */
+[data-theme="light"] .card-container {
+    background-color: #f5f5f5;
+    border-color: #e0e0e0;
+}
+
+[data-theme="light"] .footer-link {
+    color: #555;
+}
+
+[data-theme="light"] .footer-link:hover {
+    color: #FDB51B;
+}
+
+/* Make cards properly themed */
+[data-theme="light"] .faq, 
+[data-theme="light"] .tw-bg-secondary, 
+[data-theme="light"] .tw-bg-\[\#080808\] {
+    background-color: #f7f7f7 !important;
+}
+
+/* Fix button colors in light mode */
+[data-theme="light"] .btn {
+    background-color: #FDB51B;
+    color: black;
+}
+
+/* Fix SVG icons */
+[data-theme="light"] svg {
+    color: inherit;
+}
+
+/* Additional accessibility for focus states */
+#themeToggleBtn:focus {
+    outline: 2px solid #FDB51B;
+    outline-offset: 2px;
+}
