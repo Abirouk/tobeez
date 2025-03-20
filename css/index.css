@@ -304,34 +304,35 @@ header > .collapsible-header{
     transform: rotate(45deg);
 }
 
-/* Theme toggle specific styles */
+/* Theme toggle button styles */
 .theme-toggle-wrapper {
     margin: 0 10px;
 }
 
-.themeSwitcherTwo {
+.theme-toggle-button {
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
+    border: none;
+    cursor: pointer;
+    font-family: var(--body-font);
+    font-weight: 500;
 }
 
-.themeSwitcherTwo .light {
-    display: none;
+.theme-toggle-button:hover {
+    transform: translateY(-2px);
 }
 
-.themeSwitcherTwo .dark {
-    background-color: #FDB51B;
-    color: #000;
+.theme-toggle-button:focus {
+    outline: 2px solid var(--primary-text-color);
+    outline-offset: 2px;
 }
 
-/* Light mode styles */
-[data-theme="light"] .themeSwitcherTwo .dark {
-    display: none;
+.mode-icon {
+    transition: all 0.3s ease;
 }
 
-[data-theme="light"] .themeSwitcherTwo .light {
-    display: flex;
-    background-color: #FDB51B;
-    color: #000;
+/* Light mode adjustments to ensure visibility */
+[data-theme="light"] .bi-list {
+    color: var(--text-color);
 }
 
 /* Set theme-specific focus styles */
