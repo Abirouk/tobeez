@@ -78,72 +78,58 @@ function initializeApp() {
     const RESPONSIVE_WIDTH = 1024;
     
     let headerWhiteBg = false;
-    let isHeaderCollapsed = window.innerWidth < RESPONSIVE_WIDTH;
+    let isHeaderCollapsed = true;
     const collapseBtn = document.getElementById("collapse-btn");
     const collapseHeaderItems = document.getElementById("collapsed-header-items");
     
     function onHeaderClickOutside(e) {
-        if (!collapseHeaderItems.contains(e.target)) {
+        if (!collapseHeaderItems.contains(e.target) && !collapseBtn.contains(e.target)) {
             toggleHeader();
         }
     }
     
     window.toggleHeader = function() {
         if (isHeaderCollapsed) {
-            // collapseHeaderItems.classList.remove("max-md:tw-opacity-0")
-            collapseHeaderItems.classList.add("opacity-100",);
-            collapseHeaderItems.style.width = "60vw";
+            collapseHeaderItems.classList.add("active");
+            collapseHeaderItems.style.width = "300px";
             collapseBtn.classList.remove("bi-list");
-            collapseBtn.classList.add("bi-x", "max-lg:tw-fixed");
+            collapseBtn.classList.add("bi-x");
             isHeaderCollapsed = false;
     
-            setTimeout(() => window.addEventListener("click", onHeaderClickOutside), 1);
-    
+            setTimeout(() => window.addEventListener("click", onHeaderClickOutside), 100);
         } else {
-            collapseHeaderItems.classList.remove("opacity-100");
-            collapseHeaderItems.style.width = "0vw";
-            collapseBtn.classList.remove("bi-x", "max-lg:tw-fixed");
+            collapseHeaderItems.classList.remove("active");
+            collapseHeaderItems.style.width = "0";
+            collapseBtn.classList.remove("bi-x");
             collapseBtn.classList.add("bi-list");
             isHeaderCollapsed = true;
             window.removeEventListener("click", onHeaderClickOutside);
         }
-    }
+    };
     
     function responsive() {
         if (window.innerWidth > RESPONSIVE_WIDTH) {
-            collapseHeaderItems.style.width = "";
-        } else {
-            isHeaderCollapsed = true;
+            collapseHeaderItems.style.width = "auto";
+            if (!isHeaderCollapsed) {
+                isHeaderCollapsed = true;
+                collapseBtn.classList.remove("bi-x");
+                collapseBtn.classList.add("bi-list");
+                window.removeEventListener("click", onHeaderClickOutside);
+            }
+        } else if (isHeaderCollapsed) {
+            collapseHeaderItems.style.width = "0";
         }
     }
     
     window.addEventListener("resize", responsive);
     
+    // Call responsive once on init
+    responsive();
+    
     // Make sure theme UI is updated
     if (typeof window.updateThemeUI === 'function') {
         window.updateThemeUI();
     }
-    
-    // Initialize FAQ accordions
-    const faqAccordion = document.querySelectorAll('.faq-accordion');
-    
-    faqAccordion.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            this.classList.toggle('active');
-    
-            // Toggle 'rotate' class to rotate the arrow
-            let content = this.nextElementSibling;
-            
-            // content.classList.toggle('!tw-hidden')
-            if (content.style.maxHeight === '200px') {
-                content.style.maxHeight = '0px';
-                content.style.padding = '0px 18px';
-            } else {
-                content.style.maxHeight = '200px';
-                content.style.padding = '20px 18px';
-            }
-        });
-    });
 }
 
 // Function to handle header scroll behavior
@@ -167,7 +153,7 @@ function initHeaderScroll() {
     handleHeaderScroll();
 }
 
-// Separate animation initialization function
+// Animation initialization function
 function initAnimations() {
     console.log("Initializing animations...");
     
@@ -180,12 +166,12 @@ function initAnimations() {
     gsap.registerPlugin(ScrollTrigger);
 
     // Initial state for reveal-up elements
-    gsap.to(".reveal-up", {
+    gsap.set(".reveal-up", {
         opacity: 0,
-        y: "100%",
+        y: "100px",
     });
 
-    // straightens the slanting image
+    // Dashboard animation
     gsap.to("#dashboard", {
         scale: 1,
         translateY: 0,
@@ -198,27 +184,29 @@ function initAnimations() {
         }
     });
 
-    // ------------- reveal section animations ---------------
+    // Section reveal animations
     const sections = gsap.utils.toArray("section");
 
     sections.forEach((sec) => {
-        const revealUptimeline = gsap.timeline({
-            paused: true, 
-            scrollTrigger: {
-                trigger: sec,
-                start: "10% 80%", // top of trigger hits the top of viewport
-                end: "20% 90%",
-                // markers: true,
-                // scrub: 1,
-            }
-        });
-
-        revealUptimeline.to(sec.querySelectorAll(".reveal-up"), {
-            opacity: 1,
-            duration: 0.8,
-            y: "0%",
-            stagger: 0.2,
-        });
+        const revealElements = sec.querySelectorAll(".reveal-up");
+        if (revealElements.length > 0) {
+            const revealTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sec,
+                    start: "top 80%",
+                    end: "top 50%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            revealTl.to(revealElements, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+        }
     });
 }
 
@@ -255,7 +243,7 @@ function initBrandCarousel() {
     
     // Calculate total width of original logos
     const totalWidth = Array.from(brandLogos).reduce((width, logo) => {
-        return width + logo.offsetWidth + parseInt(window.getComputedStyle(logo).marginRight);
+        return width + logo.offsetWidth + parseInt(window.getComputedStyle(logo).marginRight || 0);
     }, 0);
     
     // Create the infinite scrolling animation
@@ -263,8 +251,8 @@ function initBrandCarousel() {
     
     infiniteCarousel.to(carousel, {
         x: -totalWidth,
-        duration: 20,
-        ease: "linear",
+        duration: 30,
+        ease: "none",
     });
     
     console.log("Brand carousel initialized with width:", totalWidth);
@@ -277,7 +265,7 @@ document.addEventListener('componentsLoaded', () => {
     setTimeout(() => {
         initAnimations();
         initBrandCarousel();
-        initHeaderScroll(); // Also initialize header scroll behavior
+        initHeaderScroll();
     }, 100); // Slight delay to ensure DOM is ready
 });
 
@@ -295,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .carousel {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 40px;
             transition: transform 0.3s ease;
         }
         

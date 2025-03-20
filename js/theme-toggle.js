@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Update UI elements
-    updateThemeUI();
+    setTimeout(updateThemeUI, 100);
 });
 
 // Listen for components loaded event 
 document.addEventListener('componentsLoaded', function() {
-    updateThemeUI();
+    setTimeout(updateThemeUI, 100);
 });
 
 // Global function to toggle theme
@@ -48,17 +48,13 @@ function updateThemeUI() {
     
     if (modeText && darkIcon && lightIcon && themeToggleBtn) {
         if (currentTheme === 'light') {
-            modeText.textContent = 'Light Mode';
-            lightIcon.style.display = 'block';
-            darkIcon.style.display = 'none';
-            themeToggleBtn.classList.add('light-theme-active');
-            themeToggleBtn.classList.remove('dark-theme-active');
-        } else {
             modeText.textContent = 'Dark Mode';
+            lightIcon.style.display = 'inline-block';
+            darkIcon.style.display = 'none';
+        } else {
+            modeText.textContent = 'Light Mode';
             lightIcon.style.display = 'none';
-            darkIcon.style.display = 'block';
-            themeToggleBtn.classList.add('dark-theme-active');
-            themeToggleBtn.classList.remove('light-theme-active');
+            darkIcon.style.display = 'inline-block';
         }
     }
 }

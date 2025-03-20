@@ -11,54 +11,138 @@
 }
 
 .hero-overlay {
-    background: linear-gradient(135deg, rgba(253, 181, 27, 0.85) 0%, rgba(253, 181, 27, 0.6) 100%);
-    mix-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
 }
 
 [data-theme="dark"] .hero-overlay {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 60%);
-    mix-blend-mode: multiply;
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.6) 100%);
 }
 
 [data-theme="light"] .hero-overlay {
-    background: linear-gradient(135deg, rgba(253, 181, 27, 0.75) 0%, rgba(253, 181, 27, 0.5) 100%);
-    mix-blend-mode: soft-light;
+    background-image: linear-gradient(135deg, rgba(253, 181, 27, 0.85) 0%, rgba(253, 181, 27, 0.7) 100%);
+    mix-blend-mode: multiply;
 }
 
-/* App store buttons */
-.app-store-btn {
+/* Hero background image */
+.hero-background img {
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.8;
+}
+
+/* Store buttons */
+.store-button {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.store-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .store-button {
     background-color: white;
     color: black;
-    border: 1px solid transparent;
+}
+
+[data-theme="dark"] .store-button:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .store-button {
+    background-color: #222;
+    color: white !important;
+}
+
+[data-theme="light"] .store-button:hover {
+    background-color: #000;
+}
+
+/* Phone mockup styling */
+.phone-mockup-container {
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+}
+
+.phone-mockup-container:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+/* Hero image glow effect */
+.hero-img-bg-grad {
+    width: 300px;
+    height: 300px;
+    left: 70%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(253, 181, 27, 0.5) 0%,
+        rgba(253, 181, 27, 0.3) 40%,
+        rgba(253, 181, 27, 0) 70%
+    );
+    filter: blur(40px);
+    opacity: 0.7;
+}
+
+/* Wave separator */
+.wave-separator svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+[data-theme="light"] .wave-separator path {
+    fill: white;
+}
+
+[data-theme="dark"] .wave-separator path {
+    fill: black;
+}
+
+/* Header styling */
+#main-header {
     transition: all 0.3s ease;
 }
 
-.app-store-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+#main-header.scrolled {
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] .app-store-btn {
-    background-color: white;
-    color: black;
-}
-
-[data-theme="dark"] .app-store-btn:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-[data-theme="light"] .app-store-btn {
-    background-color: black;
+/* Header links styling */
+.header-links {
     color: white;
-    border-color: black;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    text-decoration: none;
 }
 
-[data-theme="light"] .app-store-btn:hover {
-    background-color: #333;
-    border-color: #333;
+.header-links:hover {
+    color: var(--brand-color);
+    opacity: 1;
 }
 
-/* Header download button */
+.header-links::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--brand-color);
+    transition: width 0.3s ease;
+}
+
+.header-links:hover::after {
+    width: 100%;
+}
+
+/* Download button */
 .download-header-btn {
     transition: all 0.3s ease;
 }
@@ -67,50 +151,24 @@
     transform: translateY(-2px);
 }
 
-/* Header background on scroll */
-#main-header {
-    transition: background-color 0.3s ease;
-}
-
-#main-header.scrolled {
-    background-color: var(--header-bg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Hero image glow effect */
-.hero-img-bg-grad {
-    background: radial-gradient(
-        circle,
-        rgba(253, 181, 27, 0.6) 0%,
-        rgba(253, 181, 27, 0.3) 50%,
-        rgba(253, 181, 27, 0) 100%
-    );
-    filter: blur(30px);
-    opacity: 0.6;
-}
-
-/* Hero wave separator theme adjustment */
-[data-theme="light"] .hero-section svg path {
-    fill: white;
-}
-
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .app-store-btn {
-        padding: 10px 16px;
+    #collapsed-header-items.active {
+        width: 300px;
     }
     
-    #dashboard {
-        transform: scale(0.9);
+    .phone-mockup-container {
+        transform: perspective(1000px) rotateY(0) rotateX(0);
     }
 }
 
 @media (max-width: 768px) {
-    .app-store-btn {
+    .store-button {
         padding: 8px 12px;
     }
     
-    #dashboard {
-        transform: scale(0.8);
+    .hero-img-bg-grad {
+        width: 200px;
+        height: 200px;
     }
 }

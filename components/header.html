@@ -1,35 +1,34 @@
 <header
-    class="tw-max-w-lg:tw-px-4 tw-max-w-lg:tw-mr-auto tw-absolute tw-top-0 tw-z-30 tw-flex tw-h-[60px] tw-w-full tw-bg-opacity-0 tw-px-[5%] lg:tw-justify-around"
+    class="tw-absolute tw-top-0 tw-z-30 tw-flex tw-h-[70px] tw-w-full tw-px-[5%] lg:tw-justify-between tw-items-center tw-transition-all tw-duration-300"
     id="main-header"
 >
-    <a class="tw-h-[50px] tw-w-[50px] tw-p-[4px]" href="">
+    <a class="tw-h-[50px] tw-w-[50px] tw-p-[4px] tw-relative tw-z-40" href="#">
         <img
             src="./assets/logo/logo_primary.png"
-            alt="logo"
-            class="tw-object tw-h-full tw-w-full"
+            alt="Tobeez"
+            class="tw-h-full tw-w-full tw-object-contain"
         />
     </a>
     <div
-        class="collapsible-header animated-collapse max-lg:tw-shadow-md"
+        class="collapsible-header tw-absolute tw-top-0 tw-right-0 tw-w-0 tw-h-screen lg:tw-relative lg:tw-h-auto lg:tw-w-auto tw-flex tw-flex-col lg:tw-flex-row tw-justify-start lg:tw-justify-between lg:tw-items-center tw-pt-[70px] lg:tw-pt-0 tw-overflow-hidden tw-transition-all tw-duration-300 tw-bg-black lg:tw-bg-transparent lg:tw-overflow-visible tw-z-20"
         id="collapsed-header-items"
     >
         <div
-            class="tw-flex tw-h-full tw-w-max tw-gap-5 tw-text-base max-lg:tw-mt-[30px] max-lg:tw-flex-col max-lg:tw-place-items-end max-lg:tw-gap-5 lg:tw-mx-auto lg:tw-place-items-center"
+            class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-8 lg:tw-gap-10 tw-text-base tw-p-6 lg:tw-p-0 tw-items-end lg:tw-items-center"
         >
-            <a class="header-links" href=""> Retailers </a>
-            <a class="header-links" href="#pricing"> Companies </a>
-            <a class="header-links" href=""> Wholesealers </a>
-            <a class="header-links" href=""> Product Solution </a>
-            <a class="header-links" href=""> Contact us </a>
+            <a class="header-links tw-relative" href="#"> Retailers </a>
+            <a class="header-links tw-relative" href="#pricing"> Companies </a>
+            <a class="header-links tw-relative" href="#"> Wholesalers </a>
+            <a class="header-links tw-relative" href="#"> Product Solution </a>
+            <a class="header-links tw-relative" href="#"> Contact us </a>
         </div>
         <div
-            class="tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full max-md:tw-flex-col max-md:tw-place-content-center"
+            class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-4 tw-p-6 lg:tw-p-0 tw-items-end lg:tw-items-center"
         >
             <!-- Theme Toggle Button -->
-            <div class="theme-toggle-wrapper tw-relative tw-flex tw-items-center">
-                <button id="themeToggleBtn" onclick="toggleTheme()" class="tw-bg-white tw-text-gray-700 dark:tw-bg-gray-800 dark:tw-text-white tw-rounded-full tw-px-4 tw-py-2 tw-flex tw-items-center tw-gap-3 tw-shadow-md tw-transition-all tw-duration-300">
-                    <!-- Light Mode Icon (Sun) -->
-                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5 tw-text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="theme-toggle-wrapper">
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="tw-flex tw-items-center tw-gap-2 tw-px-4 tw-py-2 tw-rounded-full tw-transition-all tw-duration-300">
+                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -41,8 +40,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                     
-                    <!-- Dark Mode Icon (Moon) -->
-                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5 tw-text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     
@@ -57,7 +55,7 @@
         </div>
     </div>
     <button
-        class="bi bi-list tw-absolute tw-right-3 tw-top-3 tw-z-50 tw-text-3xl tw-text-white lg:tw-hidden"
+        class="bi bi-list tw-absolute tw-right-5 tw-top-5 tw-text-3xl tw-text-white lg:tw-hidden tw-z-40"
         onclick="toggleHeader()"
         aria-label="menu"
         id="collapse-btn"
