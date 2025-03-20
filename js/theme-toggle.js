@@ -15,19 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.setAttribute('data-theme', 'dark'); // Default to dark
     }
     
-    // Log current theme
-    console.log("Initial theme:", document.documentElement.getAttribute('data-theme'));
-    
-    // Try to update toggle if it exists
+    // Update UI elements
     updateThemeUI();
 });
 
-// Listen for system preference changes
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    if (!localStorage.getItem('theme')) {
-        document.documentElement.setAttribute('data-theme', event.matches ? 'dark' : 'light');
-        updateThemeUI();
-    }
+// Listen for components loaded event 
+document.addEventListener('componentsLoaded', function() {
+    updateThemeUI();
 });
 
 // Global function to toggle theme
@@ -50,16 +44,21 @@ function updateThemeUI() {
     const modeText = document.getElementById('modeText');
     const darkIcon = document.getElementById('darkIcon');
     const lightIcon = document.getElementById('lightIcon');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
     
-    if (modeText && darkIcon && lightIcon) {
+    if (modeText && darkIcon && lightIcon && themeToggleBtn) {
         if (currentTheme === 'light') {
             modeText.textContent = 'Light Mode';
-            darkIcon.classList.add('tw-hidden');
-            lightIcon.classList.remove('tw-hidden');
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
+            themeToggleBtn.classList.add('light-theme-active');
+            themeToggleBtn.classList.remove('dark-theme-active');
         } else {
             modeText.textContent = 'Dark Mode';
-            darkIcon.classList.remove('tw-hidden');
-            lightIcon.classList.add('tw-hidden');
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
+            themeToggleBtn.classList.add('dark-theme-active');
+            themeToggleBtn.classList.remove('light-theme-active');
         }
     }
 }

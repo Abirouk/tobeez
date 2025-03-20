@@ -1,0 +1,82 @@
+/* Theme Toggle Button Styles */
+.theme-toggle-wrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+#themeToggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Light Mode Button Style */
+[data-theme="light"] #themeToggleBtn {
+    background-color: #f0f9ff;
+    color: #1e40af;
+}
+
+[data-theme="light"] #themeToggleBtn:hover {
+    background-color: #e0f2fe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] #lightIcon {
+    display: block;
+    color: #3b82f6;
+}
+
+[data-theme="light"] #darkIcon {
+    display: none;
+}
+
+/* Dark Mode Button Style */
+[data-theme="dark"] #themeToggleBtn {
+    background-color: #1e293b;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] #themeToggleBtn:hover {
+    background-color: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] #darkIcon {
+    display: block;
+    color: #94a3b8;
+}
+
+[data-theme="dark"] #lightIcon {
+    display: none;
+}
+
+/* Transition effects */
+.mode-icon {
+    height: 18px;
+    width: 18px;
+    transition: all 0.3s ease;
+}
+
+#themeToggleBtn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    #themeToggleBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}

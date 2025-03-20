@@ -231,6 +231,7 @@ header {
     color: var(--text-color);
     transition: color 0.3s ease;
 }
+
 /* Global theme transition */
 body, 
 .tw-bg-black, 
@@ -244,37 +245,86 @@ body,
 
 /* Theme toggle styling */
 #themeToggleBtn {
-    transition: all 0.3s ease;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid transparent;
 }
 
 #themeToggleBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#themeToggleBtn .mode-icon {
-    transition: all 0.3s ease;
+#themeToggleBtn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 181, 27, 0.3);
 }
 
-/* Light mode specific overrides */
+/* Light mode toggle */
+[data-theme="light"] #themeToggleBtn {
+    background-color: #f0f9ff;
+    color: #1e40af;
+    border-color: #e0e7ff;
+}
+
+[data-theme="light"] #themeToggleBtn:hover {
+    background-color: #e0f2fe;
+}
+
+[data-theme="light"] #lightIcon {
+    color: #3b82f6;
+    display: block;
+}
+
+[data-theme="light"] #darkIcon {
+    display: none;
+}
+
+/* Dark mode toggle */
+[data-theme="dark"] #themeToggleBtn {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+}
+
+[data-theme="dark"] #themeToggleBtn:hover {
+    background-color: #0f172a;
+}
+
+[data-theme="dark"] #darkIcon {
+    color: #94a3b8;
+    display: block;
+}
+
+[data-theme="dark"] #lightIcon {
+    display: none;
+}
+
+/* Light/Dark theme specifics */
 [data-theme="light"] body {
     background-color: white;
     color: black;
 }
 
 [data-theme="light"] .tw-bg-black {
-    background-color: white;
+    background-color: white !important;
 }
 
 [data-theme="light"] .tw-text-white {
-    color: black;
+    color: black !important;
 }
 
-[data-theme="light"] #themeToggleBtn {
-    background-color: #FDB51B;
-    color: black;
+[data-theme="dark"] body {
+    background-color: black;
+    color: white;
+}
+
+[data-theme="dark"] .tw-bg-white {
+    background-color: black !important;
+}
+
+[data-theme="dark"] .tw-text-black {
+    color: white !important;
 }
 
 /* Mobile specific styles */
@@ -295,25 +345,12 @@ body,
     color: black;
 }
 
-/* Fix common theme issues for specific components */
-[data-theme="light"] .card-container {
-    background-color: #f5f5f5;
-    border-color: #e0e0e0;
-}
-
-[data-theme="light"] .footer-link {
-    color: #555;
-}
-
-[data-theme="light"] .footer-link:hover {
-    color: #FDB51B;
-}
-
-/* Make cards properly themed */
+/* Fix cards in light theme */
 [data-theme="light"] .faq, 
 [data-theme="light"] .tw-bg-secondary, 
 [data-theme="light"] .tw-bg-\[\#080808\] {
     background-color: #f7f7f7 !important;
+    border-color: #e0e0e0 !important;
 }
 
 /* Fix button colors in light mode */
@@ -325,10 +362,4 @@ body,
 /* Fix SVG icons */
 [data-theme="light"] svg {
     color: inherit;
-}
-
-/* Additional accessibility for focus states */
-#themeToggleBtn:focus {
-    outline: 2px solid #FDB51B;
-    outline-offset: 2px;
 }
