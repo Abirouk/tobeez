@@ -1,34 +1,24 @@
-<header
-    class="tw-absolute tw-top-0 tw-z-30 tw-flex tw-h-[70px] tw-w-full tw-px-[5%] lg:tw-justify-between tw-items-center tw-transition-all tw-duration-300"
-    id="main-header"
->
-    <a class="tw-h-[50px] tw-w-[50px] tw-p-[4px] tw-relative tw-z-40" href="#">
-        <img
-            src="./assets/logo/logo_primary.png"
-            alt="Tobeez"
-            class="tw-h-full tw-w-full tw-object-contain"
-        />
-    </a>
-    <div
-        class="collapsible-header tw-absolute tw-top-0 tw-right-0 tw-w-0 tw-h-screen lg:tw-relative lg:tw-h-auto lg:tw-w-auto tw-flex tw-flex-col lg:tw-flex-row tw-justify-start lg:tw-justify-between lg:tw-items-center tw-pt-[70px] lg:tw-pt-0 tw-overflow-hidden tw-transition-all tw-duration-300 tw-bg-black lg:tw-bg-transparent lg:tw-overflow-visible tw-z-20"
-        id="collapsed-header-items"
-    >
-        <div
-            class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-8 lg:tw-gap-10 tw-text-base tw-p-6 lg:tw-p-0 tw-items-end lg:tw-items-center"
-        >
-            <a class="header-links tw-relative" href="#"> Retailers </a>
-            <a class="header-links tw-relative" href="#pricing"> Companies </a>
-            <a class="header-links tw-relative" href="#"> Wholesalers </a>
-            <a class="header-links tw-relative" href="#"> Product Solution </a>
-            <a class="header-links tw-relative" href="#"> Contact us </a>
-        </div>
-        <div
-            class="tw-flex tw-flex-col lg:tw-flex-row tw-gap-4 tw-p-6 lg:tw-p-0 tw-items-end lg:tw-items-center"
-        >
-            <!-- Theme Toggle Button -->
-            <div class="theme-toggle-wrapper">
-                <button id="themeToggleBtn" onclick="toggleTheme()" class="tw-flex tw-items-center tw-gap-2 tw-px-4 tw-py-2 tw-rounded-full tw-transition-all tw-duration-300">
-                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<header class="main-header tw-fixed tw-top-0 tw-left-0 tw-right-0 tw-z-50 tw-w-full" id="main-header">
+    <div class="tw-container tw-mx-auto tw-flex tw-items-center tw-justify-between tw-py-3">
+        <!-- Logo -->
+        <a href="#" class="tw-h-7">
+            <img src="./assets/logo/logo_primary.png" alt="Tobeez" class="tw-h-full" />
+        </a>
+        
+        <!-- Navigation Links -->
+        <nav class="tw-hidden lg:tw-flex tw-items-center tw-gap-6">
+            <a href="#" class="nav-link">Retailers</a>
+            <a href="#" class="nav-link">Companies</a>
+            <a href="#" class="nav-link">Wholesalers</a>
+            <a href="#" class="nav-link">Product Solution</a>
+            <a href="#" class="nav-link">Culture</a>
+            <a href="#" class="nav-link">News</a>
+            <a href="#" class="nav-link">Contact us</a>
+            
+            <!-- Theme Toggle Button (Desktop) -->
+            <div class="theme-toggle-wrapper tw-ml-2">
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-btn">
+                    <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-4 tw-w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -40,24 +30,52 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                     
-                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-5 tw-w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-4 tw-w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     
-                    <span id="modeText">Light Mode</span>
+                    <span id="modeText" class="tw-text-xs">Light Mode</span>
                 </button>
             </div>
-            
-            <a href="#" class="download-header-btn tw-flex tw-items-center tw-gap-2 tw-bg-[#FDB51B] tw-text-black tw-px-4 tw-py-2 tw-rounded-full tw-font-medium tw-transition-all hover:tw-shadow-md">
-                <span>Download</span>
-                <i class="bi bi-download"></i>
-            </a>
-        </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="tw-block lg:tw-hidden tw-text-white tw-text-2xl" id="mobile-menu-button">
+            <i class="bi bi-list"></i>
+        </button>
     </div>
-    <button
-        class="bi bi-list tw-absolute tw-right-5 tw-top-5 tw-text-3xl tw-text-white lg:tw-hidden tw-z-40"
-        onclick="toggleHeader()"
-        aria-label="menu"
-        id="collapse-btn"
-    ></button>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="mobile-menu tw-hidden tw-w-full tw-bg-black tw-bg-opacity-95 tw-py-4 tw-px-5">
+        <nav class="tw-flex tw-flex-col tw-gap-4">
+            <a href="#" class="nav-link tw-block tw-py-2">Retailers</a>
+            <a href="#" class="nav-link tw-block tw-py-2">Companies</a>
+            <a href="#" class="nav-link tw-block tw-py-2">Wholesalers</a>
+            <a href="#" class="nav-link tw-block tw-py-2">Product Solution</a>
+            <a href="#" class="nav-link tw-block tw-py-2">Culture</a>
+            <a href="#" class="nav-link tw-block tw-py-2">News</a>
+            <a href="#" class="nav-link tw-block tw-py-2">Contact us</a>
+            <div class="theme-toggle-wrapper tw-py-2">
+                <button id="mobilethemeToggleBtn" onclick="toggleTheme()" class="theme-btn">
+                    <svg id="mobilelightIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-4 tw-w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    
+                    <svg id="mobiledarkIcon" xmlns="http://www.w3.org/2000/svg" class="mode-icon tw-h-4 tw-w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    
+                    <span id="mobilemodeText" class="tw-text-xs">Light Mode</span>
+                </button>
+            </div>
+        </nav>
+    </div>
 </header>

@@ -17,7 +17,7 @@
     --card-bg: #0f0f0f;
     --border-color: #1F2123;
     --shadow-color: rgba(0, 0, 0, 0.25);
-    --header-bg: rgba(15, 15, 15, 0.7);
+    --header-bg: rgba(15, 15, 15, 0.9);
     --overlay-color: rgba(0, 0, 0, 0.7);
 
     /* Brand colors - same in both themes */
@@ -31,6 +31,10 @@
     /* Font variables */
     --header-font: 'Godber', sans-serif;
     --body-font: 'Raleway', sans-serif;
+    
+    /* Hero specific variables */
+    --hero-text-color: white;
+    --hero-overlay-strength: 0.8;
 }
 
 /* Light mode theme */
@@ -42,8 +46,17 @@
     --card-bg: #f7f7f7;
     --border-color: #e0e0e0;
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --header-bg: rgba(255, 255, 255, 0.9);
+    --header-bg: rgba(255, 255, 255, 0.95);
     --overlay-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Container for better responsiveness */
+.tw-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* Apply these variables to elements */
@@ -51,6 +64,15 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+section {
+    position: relative;
 }
 
 /* Card background colors */
@@ -78,17 +100,51 @@ body {
 }
 
 /* Header and navigation */
-header {
-    color: var(--text-color);
+.main-header {
+    background-color: transparent;
+    transition: all 0.3s ease;
 }
 
-.header-links {
-    color: var(--text-color);
+.main-header.scrolled {
+    background-color: var(--header-bg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation links styling */
+.nav-link {
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
     transition: color 0.3s ease;
+    position: relative;
 }
 
-.header-links:hover {
-    color: var(--header-link-hover);
+.nav-link:hover {
+    color: var(--brand-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--brand-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+[data-theme="light"] .main-header .nav-link {
+    color: white;
+}
+
+[data-theme="light"] .main-header.scrolled .nav-link {
+    color: #333;
 }
 
 /* Shadow adjustments */
@@ -150,6 +206,49 @@ header {
         rgba(253,181,27,0.2) 89%);
     filter: blur(50px);
     opacity: 0.5;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Ensure theme colors propagate correctly */
+.hero-background img {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .hero-background img {
+    opacity: 0.8; /* Slightly more visible in light mode */
+}
+
+/* Store buttons */
+.store-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.store-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile menu styling */
+.mobile-menu {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu.active {
+    display: block;
 }
 
 /* Border gradients */
@@ -206,14 +305,13 @@ header {
     color: var(--brand-color);
 }
 
-/* Mobile navigation */
-@media not all and (min-width: 1024px) {
-    header .collapsible-header {
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        box-shadow: 3px 0px 3px 2px var(--shadow-color);
-        transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    }
+/* Fix for mobile menu in light theme */
+[data-theme="light"] .mobile-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .mobile-menu .nav-link {
+    color: #333;
 }
 
 /* Image adjustments for light mode */
@@ -224,12 +322,6 @@ header {
 
 [data-theme="light"] img.tw-grayscale:hover {
     filter: grayscale(0%) brightness(1) contrast(1);
-}
-
-/* Mobile navigation button */
-#collapse-btn {
-    color: var(--text-color);
-    transition: color 0.3s ease;
 }
 
 /* Global theme transition */
@@ -245,13 +337,22 @@ body,
 
 /* Theme toggle styling */
 #themeToggleBtn {
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid transparent;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 #themeToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
 
@@ -262,13 +363,17 @@ body,
 
 /* Light mode toggle */
 [data-theme="light"] #themeToggleBtn {
-    background-color: #f0f9ff;
-    color: #1e40af;
-    border-color: #e0e7ff;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+[data-theme="light"] .main-header.scrolled #themeToggleBtn {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #333;
 }
 
 [data-theme="light"] #themeToggleBtn:hover {
-    background-color: #e0f2fe;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] #lightIcon {
@@ -282,13 +387,12 @@ body,
 
 /* Dark mode toggle */
 [data-theme="dark"] #themeToggleBtn {
-    background-color: #1e293b;
-    color: #f1f5f9;
-    border-color: #334155;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 [data-theme="dark"] #themeToggleBtn:hover {
-    background-color: #0f172a;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme="dark"] #darkIcon {
@@ -327,24 +431,6 @@ body,
     color: white !important;
 }
 
-/* Mobile specific styles */
-@media (max-width: 768px) {
-    #themeToggleBtn {
-        width: 100%;
-        justify-content: center;
-        margin: 10px 0;
-    }
-}
-
-/* Header adjustments for light theme */
-[data-theme="light"] header .collapsible-header {
-    background-color: rgba(255, 255, 255, 0.9); 
-}
-
-[data-theme="light"] #collapse-btn {
-    color: black;
-}
-
 /* Fix cards in light theme */
 [data-theme="light"] .faq, 
 [data-theme="light"] .tw-bg-secondary, 
@@ -363,32 +449,72 @@ body,
 [data-theme="light"] svg {
     color: inherit;
 }
-/* Add to your index.css */
 
-/* Hero background integration with theme */
-:root {
-    /* Your existing variables */
-    --brand-color: #FDB51B;
-    /* Other variables... */
+/* Wave separator */
+.wave-separator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 10;
+}
+
+.wave-separator svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+[data-theme="light"] .wave-separator path {
+    fill: white;
+}
+
+[data-theme="dark"] .wave-separator path {
+    fill: black;
+}
+
+/* Media queries */
+@media (max-width: 1280px) {
+    .tw-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     
-    /* Add hero specific variables */
-    --hero-text-color: white;
-    --hero-overlay-strength: 0.8;
+    .hero-img-bg-grad {
+        right: 10%;
+    }
 }
 
-body {
-    /* Your existing styles */
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+@media (max-width: 1024px) {
+    .phone-mockup-container {
+        transform: none;
+        margin: 2rem auto 0;
+    }
+    
+    .hero-img-bg-grad {
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
 }
 
-/* Ensure theme colors propagate correctly */
-.hero-background img {
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-[data-theme="light"] .hero-background img {
-    opacity: 0.8; /* Slightly more visible in light mode */
+@media (max-width: 768px) {
+    #themeToggleBtn {
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    
+    .store-button {
+        padding: 10px 16px;
+    }
+    
+    .hero-img-bg-grad {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .wave-separator {
+        height: 80px;
+    }
 }

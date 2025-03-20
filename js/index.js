@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Initialize header scroll behavior
         initHeaderScroll();
+        
+        // Initialize mobile menu
+        initMobileMenu();
+        
+        // Make sure theme toggle works
+        setupThemeToggle();
     });
 });
 
@@ -74,59 +80,75 @@ async function loadComponents() {
 }
 
 function initializeApp() {
-    // initialization
-    const RESPONSIVE_WIDTH = 1024;
-    
-    let headerWhiteBg = false;
-    let isHeaderCollapsed = true;
-    const collapseBtn = document.getElementById("collapse-btn");
-    const collapseHeaderItems = document.getElementById("collapsed-header-items");
-    
-    function onHeaderClickOutside(e) {
-        if (!collapseHeaderItems.contains(e.target) && !collapseBtn.contains(e.target)) {
-            toggleHeader();
-        }
-    }
-    
-    window.toggleHeader = function() {
-        if (isHeaderCollapsed) {
-            collapseHeaderItems.classList.add("active");
-            collapseHeaderItems.style.width = "300px";
-            collapseBtn.classList.remove("bi-list");
-            collapseBtn.classList.add("bi-x");
-            isHeaderCollapsed = false;
-    
-            setTimeout(() => window.addEventListener("click", onHeaderClickOutside), 100);
-        } else {
-            collapseHeaderItems.classList.remove("active");
-            collapseHeaderItems.style.width = "0";
-            collapseBtn.classList.remove("bi-x");
-            collapseBtn.classList.add("bi-list");
-            isHeaderCollapsed = true;
-            window.removeEventListener("click", onHeaderClickOutside);
-        }
-    };
-    
-    function responsive() {
-        if (window.innerWidth > RESPONSIVE_WIDTH) {
-            collapseHeaderItems.style.width = "auto";
-            if (!isHeaderCollapsed) {
-                isHeaderCollapsed = true;
-                collapseBtn.classList.remove("bi-x");
-                collapseBtn.classList.add("bi-list");
-                window.removeEventListener("click", onHeaderClickOutside);
-            }
-        } else if (isHeaderCollapsed) {
-            collapseHeaderItems.style.width = "0";
-        }
-    }
-    
-    window.addEventListener("resize", responsive);
-    
-    // Call responsive once on init
-    responsive();
-    
     // Make sure theme UI is updated
+    if (typeof window.updateThemeUI === 'function') {
+        window.updateThemeUI();
+    }
+}
+
+// Setup theme toggle functionality
+function setupThemeToggle() {
+    // First make sure theme is properly set from localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    
+    // Add toggle functionality if not already present
+    if (typeof window.toggleTheme !== 'function') {
+        window.toggleTheme = function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            updateThemeUI();
+        };
+    }
+    
+    // Add UI update function if not already present
+    if (typeof window.updateThemeUI !== 'function') {
+        window.updateThemeUI = function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            
+            // Update desktop theme toggle
+            const modeText = document.getElementById('modeText');
+            const darkIcon = document.getElementById('darkIcon');
+            const lightIcon = document.getElementById('lightIcon');
+            
+            if (modeText && darkIcon && lightIcon) {
+                if (currentTheme === 'light') {
+                    modeText.textContent = 'Dark Mode';
+                    lightIcon.style.display = 'block';
+                    darkIcon.style.display = 'none';
+                } else {
+                    modeText.textContent = 'Light Mode';
+                    lightIcon.style.display = 'none';
+                    darkIcon.style.display = 'block';
+                }
+            }
+            
+            // Update mobile theme toggle
+            const mobileModeText = document.getElementById('mobilemodeText');
+            const mobileDarkIcon = document.getElementById('mobiledarkIcon');
+            const mobileLightIcon = document.getElementById('mobilelightIcon');
+            
+            if (mobileModeText && mobileDarkIcon && mobileLightIcon) {
+                if (currentTheme === 'light') {
+                    mobileModeText.textContent = 'Dark Mode';
+                    mobileLightIcon.style.display = 'block';
+                    mobileDarkIcon.style.display = 'none';
+                } else {
+                    mobileModeText.textContent = 'Light Mode';
+                    mobileLightIcon.style.display = 'none';
+                    mobileDarkIcon.style.display = 'block';
+                }
+            }
+        };
+    }
+    
+    // Update UI immediately
     if (typeof window.updateThemeUI === 'function') {
         window.updateThemeUI();
     }
@@ -134,9 +156,9 @@ function initializeApp() {
 
 // Function to handle header scroll behavior
 function handleHeaderScroll() {
-    const header = document.getElementById('main-header');
+    const header = document.querySelector('.main-header');
     if (header) {
-        if (window.scrollY > 60) {
+        if (window.scrollY > 30) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
@@ -151,6 +173,24 @@ function initHeaderScroll() {
     
     // Call once to set initial state
     handleHeaderScroll();
+}
+
+// Initialize mobile menu functionality
+function initMobileMenu() {
+    console.log("Initializing mobile menu...");
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            if (mobileMenu.classList.contains('active')) {
+                menuButton.innerHTML = '<i class="bi bi-x"></i>';
+            } else {
+                menuButton.innerHTML = '<i class="bi bi-list"></i>';
+            }
+        });
+    }
 }
 
 // Animation initialization function
@@ -168,19 +208,32 @@ function initAnimations() {
     // Initial state for reveal-up elements
     gsap.set(".reveal-up", {
         opacity: 0,
-        y: "50px", // Reduced from 100px for more subtle animation
+        y: "30px",
+    });
+
+    // Create a timeline for hero section animations
+    const heroTl = gsap.timeline();
+
+    // Animate hero content
+    heroTl.to(".hero-section .reveal-up", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out"
     });
 
     // Phone mockup animation
     gsap.to(".phone-mockup-container", {
         rotateY: "0deg",
         rotateX: "0deg",
-        duration: 1.5,
+        duration: 1,
+        delay: 0.3,
         ease: "power2.out",
     });
 
     // Section reveal animations
-    const sections = gsap.utils.toArray("section");
+    const sections = gsap.utils.toArray("section:not(#hero-section)");
 
     sections.forEach((sec) => {
         const revealElements = sec.querySelectorAll(".reveal-up");
@@ -202,6 +255,15 @@ function initAnimations() {
                 ease: "power2.out"
             });
         }
+    });
+
+    // Ensure wave separator is visible
+    gsap.from(".wave-separator", {
+        y: 20,
+        autoAlpha: 0,
+        duration: 0.8,
+        delay: 0.5,
+        ease: "power2.out"
     });
 }
 
@@ -261,32 +323,7 @@ document.addEventListener('componentsLoaded', () => {
         initAnimations();
         initBrandCarousel();
         initHeaderScroll();
+        initMobileMenu();
+        setupThemeToggle();
     }, 100); // Slight delay to ensure DOM is ready
-});
-
-// Add CSS for carousel
-document.addEventListener('DOMContentLoaded', () => {
-    // Add carousel styles dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-        .carousel-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .carousel {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            transition: transform 0.3s ease;
-        }
-        
-        .carousel-img {
-            min-width: 150px;
-            display: flex;
-            justify-content: center;
-        }
-    `;
-    document.head.appendChild(style);
 });
