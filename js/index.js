@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     loadComponents().then(() => {
         console.log("Components loaded, initializing app...");
         initializeApp();
+        
+        // Initialize animations immediately after components load
+        initAnimations();
+        
+        // Initialize brand carousel
+        initBrandCarousel();
+        
+        // Initialize header scroll behavior
+        initHeaderScroll();
     });
 });
 
@@ -81,7 +90,8 @@ function initializeApp() {
     
     window.toggleHeader = function() {
         if (isHeaderCollapsed) {
-            collapseHeaderItems.classList.add("opacity-100");
+            // collapseHeaderItems.classList.remove("max-md:tw-opacity-0")
+            collapseHeaderItems.classList.add("opacity-100",);
             collapseHeaderItems.style.width = "60vw";
             collapseBtn.classList.remove("bi-list");
             collapseBtn.classList.add("bi-x", "max-lg:tw-fixed");
@@ -115,21 +125,16 @@ function initializeApp() {
     }
     
     // Initialize FAQ accordions
-    initFaqAccordion();
-    
-    // Initialize animations
-    initAnimations();
-}
-
-function initFaqAccordion() {
     const faqAccordion = document.querySelectorAll('.faq-accordion');
     
     faqAccordion.forEach(function (btn) {
         btn.addEventListener('click', function () {
             this.classList.toggle('active');
     
+            // Toggle 'rotate' class to rotate the arrow
             let content = this.nextElementSibling;
             
+            // content.classList.toggle('!tw-hidden')
             if (content.style.maxHeight === '200px') {
                 content.style.maxHeight = '0px';
                 content.style.padding = '0px 18px';
@@ -141,21 +146,46 @@ function initFaqAccordion() {
     });
 }
 
+// Function to handle header scroll behavior
+function handleHeaderScroll() {
+    const header = document.getElementById('main-header');
+    if (header) {
+        if (window.scrollY > 60) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+}
+
+// Initialize header scroll functionality
+function initHeaderScroll() {
+    console.log("Initializing header scroll behavior...");
+    window.addEventListener('scroll', handleHeaderScroll);
+    
+    // Call once to set initial state
+    handleHeaderScroll();
+}
+
+// Separate animation initialization function
 function initAnimations() {
+    console.log("Initializing animations...");
+    
     if (typeof gsap === 'undefined') {
         console.error('GSAP library not loaded');
         return;
     }
     
+    // Animations
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Initial state for reveal-up elements
     gsap.to(".reveal-up", {
         opacity: 0,
         y: "100%",
     });
-    
-    // Dashboard animation
+
+    // straightens the slanting image
     gsap.to("#dashboard", {
         scale: 1,
         translateY: 0,
@@ -167,20 +197,22 @@ function initAnimations() {
             scrub: 1,
         }
     });
-    
-    // Section reveal animations
+
+    // ------------- reveal section animations ---------------
     const sections = gsap.utils.toArray("section");
-    
+
     sections.forEach((sec) => {
         const revealUptimeline = gsap.timeline({
             paused: true, 
             scrollTrigger: {
                 trigger: sec,
-                start: "10% 80%",
+                start: "10% 80%", // top of trigger hits the top of viewport
                 end: "20% 90%",
+                // markers: true,
+                // scrub: 1,
             }
         });
-    
+
         revealUptimeline.to(sec.querySelectorAll(".reveal-up"), {
             opacity: 1,
             duration: 0.8,
@@ -189,3 +221,89 @@ function initAnimations() {
         });
     });
 }
+
+// Brand carousel function
+function initBrandCarousel() {
+    console.log("Initializing brand carousel...");
+    
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP library not loaded');
+        return;
+    }
+    
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) {
+        console.error('Carousel element not found');
+        return;
+    }
+    
+    // Clone the brand logos to create the infinite scrolling effect
+    const brandLogos = carousel.querySelectorAll('.carousel-img');
+    if (brandLogos.length === 0) {
+        console.error('No brand logos found');
+        return;
+    }
+    
+    // Create clones for infinite scrolling
+    brandLogos.forEach(logo => {
+        const clone = logo.cloneNode(true);
+        carousel.appendChild(clone);
+    });
+    
+    // Set initial position
+    gsap.set(carousel, { x: 0 });
+    
+    // Calculate total width of original logos
+    const totalWidth = Array.from(brandLogos).reduce((width, logo) => {
+        return width + logo.offsetWidth + parseInt(window.getComputedStyle(logo).marginRight);
+    }, 0);
+    
+    // Create the infinite scrolling animation
+    const infiniteCarousel = gsap.timeline({ repeat: -1 });
+    
+    infiniteCarousel.to(carousel, {
+        x: -totalWidth,
+        duration: 20,
+        ease: "linear",
+    });
+    
+    console.log("Brand carousel initialized with width:", totalWidth);
+}
+
+// Also add a direct event listener that will initialize animations and carousel
+// when components are loaded, as a fallback approach
+document.addEventListener('componentsLoaded', () => {
+    console.log("Components loaded event triggered");
+    setTimeout(() => {
+        initAnimations();
+        initBrandCarousel();
+        initHeaderScroll(); // Also initialize header scroll behavior
+    }, 100); // Slight delay to ensure DOM is ready
+});
+
+// Add CSS for carousel
+document.addEventListener('DOMContentLoaded', () => {
+    // Add carousel styles dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .carousel {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-img {
+            min-width: 150px;
+            display: flex;
+            justify-content: center;
+        }
+    `;
+    document.head.appendChild(style);
+});

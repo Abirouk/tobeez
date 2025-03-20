@@ -363,3 +363,32 @@ body,
 [data-theme="light"] svg {
     color: inherit;
 }
+/* Add to your index.css */
+
+/* Hero background integration with theme */
+:root {
+    /* Your existing variables */
+    --brand-color: #FDB51B;
+    /* Other variables... */
+    
+    /* Add hero specific variables */
+    --hero-text-color: white;
+    --hero-overlay-strength: 0.8;
+}
+
+body {
+    /* Your existing styles */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure theme colors propagate correctly */
+.hero-background img {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .hero-background img {
+    opacity: 0.8; /* Slightly more visible in light mode */
+}

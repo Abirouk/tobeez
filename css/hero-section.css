@@ -1,0 +1,116 @@
+/* Hero section styles */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay styles */
+.hero-background {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-overlay {
+    background: linear-gradient(135deg, rgba(253, 181, 27, 0.85) 0%, rgba(253, 181, 27, 0.6) 100%);
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .hero-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 60%);
+    mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .hero-overlay {
+    background: linear-gradient(135deg, rgba(253, 181, 27, 0.75) 0%, rgba(253, 181, 27, 0.5) 100%);
+    mix-blend-mode: soft-light;
+}
+
+/* App store buttons */
+.app-store-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.app-store-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .app-store-btn {
+    background-color: white;
+    color: black;
+}
+
+[data-theme="dark"] .app-store-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .app-store-btn {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+[data-theme="light"] .app-store-btn:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* Header download button */
+.download-header-btn {
+    transition: all 0.3s ease;
+}
+
+.download-header-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Header background on scroll */
+#main-header {
+    transition: background-color 0.3s ease;
+}
+
+#main-header.scrolled {
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero image glow effect */
+.hero-img-bg-grad {
+    background: radial-gradient(
+        circle,
+        rgba(253, 181, 27, 0.6) 0%,
+        rgba(253, 181, 27, 0.3) 50%,
+        rgba(253, 181, 27, 0) 100%
+    );
+    filter: blur(30px);
+    opacity: 0.6;
+}
+
+/* Hero wave separator theme adjustment */
+[data-theme="light"] .hero-section svg path {
+    fill: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .app-store-btn {
+        padding: 10px 16px;
+    }
+    
+    #dashboard {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 768px) {
+    .app-store-btn {
+        padding: 8px 12px;
+    }
+    
+    #dashboard {
+        transform: scale(0.8);
+    }
+}

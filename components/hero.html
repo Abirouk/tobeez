@@ -1,70 +1,82 @@
 <section
-    class="hero-section tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden max-md:tw-mt-[50px]"
+    class="hero-section tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden"
     id="hero-section"
 >
-    <div
-        class="tw-flex tw-h-full tw-min-h-[100vh] tw-w-full tw-flex-col tw-place-content-center tw-gap-6 tw-p-[5%] max-xl:tw-place-items-center max-lg:tw-p-4"
-    >
-        <div
-            class="tw-flex tw-flex-col tw-place-content-center tw-items-center"
-        >
-            <div
-                class="reveal-up gradient-text tw-text-center tw-text-6xl tw-font-semibold tw-uppercase tw-leading-[80px] max-lg:tw-text-4xl max-md:tw-leading-snug"
-                style="font-family: var(--header-font);"
-            >
-                <span class=""> Navigate </span>
-                <br />
-                <span class=""> Terrains with ease </span>
+    <!-- Hero background with overlay -->
+    <div class="hero-background tw-absolute tw-inset-0 tw-z-0">
+        <div class="hero-overlay tw-absolute tw-inset-0"></div>
+        <img 
+            src="./assets/images/home/people-background.jpg" 
+            alt="Background" 
+            class="tw-h-full tw-w-full tw-object-cover"
+        />
+    </div>
+
+    <!-- Main content container -->
+    <div class="tw-relative tw-z-10 tw-flex tw-h-full tw-min-h-[100vh] tw-w-full tw-flex-col tw-pt-[80px] lg:tw-pt-[100px] tw-p-[5%]">
+        <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
+            <!-- Left content (text) -->
+            <div class="tw-flex tw-flex-col tw-max-w-[600px]">
+                <h1 
+                    class="reveal-up tw-text-4xl lg:tw-text-5xl xl:tw-text-6xl tw-font-bold tw-mb-6"
+                    style="font-family: var(--header-font);"
+                >
+                    <span class="tw-text-white">Digitizing The</span><br>
+                    <span class="tw-text-white">Traditional Trade Market</span>
+                </h1>
+                
+                <p class="reveal-up tw-text-gray-200 tw-text-lg tw-mb-8 tw-max-w-[90%]">
+                    Tobeez is a fast-growing B2B E-commerce marketplace. Bringing
+                    the marketplace online, Tobeez connects buyers and sellers across the
+                    supply chain. These ties grant merchants efficient and profitable growth, so
+                    we can all grow equally.
+                </p>
+                
+                <!-- App store buttons -->
+                <div class="reveal-up tw-flex tw-flex-wrap tw-gap-4 tw-mt-6">
+                    <a href="#" class="app-store-btn tw-flex tw-items-center tw-gap-2 tw-px-5 tw-py-3 tw-rounded-md tw-transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-w-6 tw-h-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.9,10.9C17.9,9,19.3,7.9,20.6,7.4C19.7,6.2,18.3,5.5,16.9,5.5C15.1,5.4,13.4,6.7,12.5,6.7C11.6,6.7,10.1,5.5,8.7,5.5C6.7,5.5,4.7,7,3.6,9.2C2,12.5,3.1,18,4.6,20.9C5.4,22.4,6.3,24,7.6,24C8.8,24,9.3,23,10.7,23C12.1,23,12.5,24,13.7,24C15,24,15.8,22.5,16.6,21.1C17.5,19.5,17.9,18,17.9,17.9C17.8,17.8,15.3,16.9,15.3,14C15.3,12.1,16.4,11.1,16.4,11.1C15.5,9.7,14,9.6,13.6,9.6C11.9,9.5,10.6,10.9,9.9,10.9C9.2,10.9,8.1,9.8,6.6,9.8C5.2,9.8,4,10.7,3.2,12C3.1,12,5.1,22,12,22"></path>
+                            <path d="M13.1,3.1C13.8,2.2,14.9,1.7,15.9,1.7C16,2.7,15.6,3.8,14.9,4.7C14.2,5.6,13.2,6.2,12.1,6.1C12,5.1,12.5,4,13.1,3.1"></path>
+                        </svg>
+                        <div class="tw-flex tw-flex-col">
+                            <span class="tw-text-xs">Download on the</span>
+                            <span class="tw-text-base tw-font-semibold">App Store</span>
+                        </div>
+                    </a>
+                    <a href="#" class="app-store-btn tw-flex tw-items-center tw-gap-2 tw-px-5 tw-py-3 tw-rounded-md tw-transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-w-6 tw-h-6" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3.61108 2.99571C3.61108 2.99571 3.61108 6.17751 3.61108 9.3241C3.61108 12.4707 3.61108 15.6177 3.61108 15.6177C3.61108 15.6177 19.8055 9.30659 19.8055 9.30659C19.8055 9.30659 3.61108 2.99571 3.61108 2.99571Z" fill="#EA4335"></path>
+                            <path d="M3.61108 15.6178C3.61108 15.6178 3.61108 18.7996 3.61108 21.0044C3.61108 21.0044 15.1232 9.78648 19.8056 9.3066C19.8056 9.3066 3.61108 15.6178 3.61108 15.6178Z" fill="#FBBC04"></path>
+                            <path d="M19.8056 9.30664C15.1232 9.78652 3.61108 21.0044 3.61108 21.0044C3.61108 21.0044 14.4736 14.6755 19.8056 9.30664Z" fill="#34A853"></path>
+                            <path d="M19.8055 9.30659C14.4735 14.6755 3.61099 21.0043 3.61099 21.0043C3.61099 21.0043 3.61099 12.4707 3.61099 9.32409C3.61099 6.1775 3.61099 2.9957 3.61099 2.9957C3.61099 2.9957 19.8055 9.30659 19.8055 9.30659Z" fill="#4285F4"></path>
+                        </svg>
+                        <div class="tw-flex tw-flex-col">
+                            <span class="tw-text-xs">GET IT ON</span>
+                            <span class="tw-text-base tw-font-semibold">Google Play</span>
+                        </div>
+                    </a>
+                </div>
             </div>
             
-        </div>
-
-        <div
-            class="reveal-up tw-relative tw-mt-8 tw-flex tw-w-full tw-place-content-center tw-place-items-center"
-            id="dashboard-container"
-        >
-            <div
-                class="tw-relative tw-max-w-[800px] tw-max-h-[800px] tw-overflow-hidden tw-rounded-xl tw-bg-transparent max-md:tw-max-w-full"
-                id="dashboard"
-            >
-                <img
-                    src="./assets/images/home/phone.png"
-                    alt="dashboard"
-                    class=" tw-w-full tw-object-contain tw-opacity-90 "
-                />
+            <!-- Right content (phone image) -->
+            <div class="reveal-up tw-relative tw-flex tw-justify-center tw-w-full lg:tw-w-1/2 tw-mt-6 lg:tw-mt-0" id="dashboard-container">
+                <div class="tw-relative tw-max-w-[500px] tw-z-10" id="dashboard">
+                    <img 
+                        src="./assets/images/home/phones-mockup.png" 
+                        alt="App Screenshots" 
+                        class="tw-w-full tw-object-contain tw-z-20 tw-relative tw-drop-shadow-xl"
+                    />
+                </div>
+                <div class="hero-img-bg-grad tw-absolute tw-left-[50%] tw--translate-x-[50%] tw-top-[30%] tw-h-[200px] tw-w-[200px]"></div>
             </div>
-
-            <div
-                class="hero-img-bg-grad tw-absolute tw-left-[50%] tw--translate-x-[50%] tw-top-5 tw-h-[200px] tw-w-[200px]"
-            ></div>
         </div>
-
-        <div class="tw-flex tw-flex-col tw-w-full tw-place-items-center tw-place-content-center">
-             <div
-                class="reveal-up tw-mt-10 tw-max-w-[450px] tw-p-2 tw-text-center tw-text-gray-300 max-lg:tw-max-w-full"
-                style="font-family: var(--body-font);"
-            >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit
-                Lorem ipsum dolor sit amet.
-            </div>
-
-            <div
-            class="reveal-up tw-mt-10 tw-flex tw-place-items-center tw-gap-4"
-        >
-            <a
-                class="btn tw-bg-[#FDB51B] tw-text-black tw-shadow-lg tw-shadow-[#FDB51B] tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.03]"
-                href=""
-            >
-                Get started
-            </a>
-            <a
-                class="btn tw-flex tw-gap-2 !tw-bg-black !tw-text-[#FDB51B] tw-border tw-border-[#FDB51B] tw-transition-colors tw-duration-[0.3s] hover:!tw-bg-[#FDB51B] hover:!tw-text-black"
-                href=""
-            >
-                <i class="bi bi-play-circle-fill"></i>
-                <span>Learn more</span>
-            </a>
-        </div>
-        </div>
+    </div>
+    
+    <!-- Wave separator -->
+    <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="tw-w-full">
+            <path fill="var(--bg-color)" fill-opacity="1" d="M0,224L80,229.3C160,235,320,245,480,240C640,235,800,213,960,213.3C1120,213,1280,235,1360,245.3L1440,256L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
     </div>
 </section>
