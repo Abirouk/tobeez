@@ -10,16 +10,20 @@
 
 :root {
     /* Default theme (dark mode) */
-    --bg-color: #000;
+    --bg-color: #000000;
     --text-color: #ffffff;
     --secondary-text-color: #c7c6c6;
-    --card-bg: #080808;
+    --muted-text-color: #a0a0a0;
+    --card-bg: #0f0f0f;
     --border-color: #1F2123;
     --shadow-color: rgba(0, 0, 0, 0.25);
+    --header-bg: rgba(15, 15, 15, 0.7);
+    --overlay-color: rgba(0, 0, 0, 0.7);
 
-    --btn-color: #000000;/* button color*/
-    --btn-bg: #FDB51B;/* button bg color*/
-
+    /* Brand colors - same in both themes */
+    --brand-color: #FDB51B;
+    --btn-color: #000000;
+    --btn-bg: #FDB51B;
     --primary-text-color: #FDB51B;
     --header-link-hover: #FDB51B;
     --input-hover-bd-color: #FDB51B;
@@ -34,116 +38,96 @@
     --bg-color: #ffffff;
     --text-color: #000000;
     --secondary-text-color: #333333;
-    --card-bg: #f5f5f5;
+    --muted-text-color: #595959;
+    --card-bg: #f7f7f7;
     --border-color: #e0e0e0;
     --shadow-color: rgba(0, 0, 0, 0.1);
-
-    /* Keep brand colors the same */
-    --btn-color: #000000;
-    --btn-bg: #FDB51B;
-    --primary-text-color: #FDB51B;
-    --header-link-hover: #FDB51B;
-    --input-hover-bd-color: #FDB51B;
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --overlay-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Apply these variables to elements */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.faq, .tw-bg-secondary {
+/* Card background colors */
+.faq, 
+.tw-bg-secondary, 
+.tw-bg-\[\#080808\] {
     background-color: var(--card-bg) !important;
+    transition: background-color 0.3s ease;
 }
 
-.tw-border-\[\#1F2123\], .tw-border-outlineColor, .faq {
+/* Border colors */
+.tw-border-\[\#1F2123\], 
+.tw-border-outlineColor, 
+.faq,
+.tw-border-\[1px\] {
     border-color: var(--border-color) !important;
+    transition: border-color 0.3s ease;
 }
 
-.tw-text-gray-300, .tw-text-gray-400 {
+/* Text colors */
+.tw-text-gray-300, 
+.tw-text-gray-400 {
     color: var(--secondary-text-color) !important;
+    transition: color 0.3s ease;
+}
+
+/* Header and navigation */
+header {
+    color: var(--text-color);
+}
+
+.header-links {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.header-links:hover {
+    color: var(--header-link-hover);
 }
 
 /* Shadow adjustments */
-.tw-shadow-lg, .tw-shadow-md {
+.tw-shadow-lg, 
+.tw-shadow-md {
     box-shadow: 0 10px 15px -3px var(--shadow-color), 
                 0 4px 6px -4px var(--shadow-color) !important;
+    transition: box-shadow 0.3s ease;
 }
 
-/* Light mode gradient text adjustments */
+/* Text gradient adjustments */
+.gradient-text {
+    background: linear-gradient(90deg, rgba(255,255,255,1) 18%, rgba(253,181,27,1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background 0.3s ease;
+}
+
 [data-theme="light"] .gradient-text {
     background: linear-gradient(90deg, rgba(0,0,0,0.9) 18%, rgba(253,181,27,1) 71%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-html {
-    scroll-behavior: smooth;
-    font-family: var(--body-font);
-}
-
-/* Apply header font to headings */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--header-font);
-}
-
-header{
-    /* background-color: #fff;
-    color: #000; */
-    color: var(--text-color);
-}
-
-
-header > .collapsible-header{
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    background-color: inherit;
-    place-content: center;
-    overflow: hidden;
-    transition: width 0.3s ease;
-}
-
-.animated-collapse{
-    transition: width 0.3s ease;
-}
-
-
-.header-links {
-    display: flex;
-    align-items: center;
-    min-width: fit-content;
-    border-radius: 5px;
-    padding: 5px 10px;
-    transition: background-color 0.5s, color 0.5s;
-    color: var(--text-color);
-}
-
-
-.header-links:hover {
-    color: var(--header-link-hover);
-}
-
-.primary-text-color{
-    color: var(--primary-text-color);
-}
-
-.gradient-text{
-    background: rgb(255, 255, 255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 18%, rgba(253,181,27,1) 71%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.signup-img-section{
-    background-image: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url("../assets/images/home/darkbg.png");
-    background-position: center; 
-    background-repeat: no-repeat; 
+/* Signup section background */
+.signup-img-section {
+    background-image: linear-gradient(to right, var(--overlay-color), rgba(0,0,0,0.5)), url("../assets/images/home/darkbg.png");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    transition: background-image 0.3s ease;
 }
 
-/* Add a gold-colored overlay to the signup section */
+[data-theme="light"] .signup-img-section {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.7)), url("../assets/images/home/darkbg.png");
+}
+
+/* Gold overlay effect */
 .signup-img-section::after {
     content: '';
     position: absolute;
@@ -156,233 +140,94 @@ header > .collapsible-header{
     pointer-events: none;
 }
 
-.hero-img-bg-grad{
-    background: rgb(253,181,27);
-    background: linear-gradient(90deg, rgba(253,181,27,0.6) 8%, rgba(253,181,27,0.4) 31%, rgba(253,181,27,0.3) 76%, rgba(253,181,27,0.2) 89%);
+/* Hero background glow */
+.hero-img-bg-grad {
+    background: var(--brand-color);
+    background: linear-gradient(90deg, 
+        rgba(253,181,27,0.6) 8%, 
+        rgba(253,181,27,0.4) 31%, 
+        rgba(253,181,27,0.3) 76%, 
+        rgba(253,181,27,0.2) 89%);
     filter: blur(50px);
     opacity: 0.5;
 }
 
-#dashboard {
-    /* transform-origin: bottom center; */
-    transform: perspective(1200px) translateX(0px) translateY(12px) scale(0.8)
-        rotate(0deg) rotateX(70deg);
-    transition: transform 0.5;
-}
-
-.border-gradient{
-    background: rgb(253,181,27);
+/* Border gradients */
+.border-gradient {
+    background: var(--brand-color);
     background: linear-gradient(180deg, rgba(253,181,27,1) 35%, rgba(253,181,27,0) 71%);
     padding: 2px;
     border-radius: 10px;
 }
 
-.border-gradient>div{
+.border-gradient > div {
     background-color: var(--bg-color);
     border-radius: inherit;
+    transition: background-color 0.3s ease;
 }
 
-.opacity-0{
-    opacity: 0 !important;
-}
-
-.opacity-100{
-    opacity: 100 !important;
-}
-
-.btn{
-    padding: 10px 15px;
-    width: max-content;
-    border-radius: 5px;
-    color: var(--btn-color);
-    background-color: var(--btn-bg);
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    cursor: pointer;
-    font-family: var(--body-font);
-}
-
-.btn:hover{
-    opacity: 0.9;
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-
-.btn:disabled{
-    cursor: default;
-    opacity: 0.7;
-}
-
-.input{
-    padding: 10px;
+/* Form elements */
+.input {
     background-color: transparent;
-    border-radius: 5px;
-    /* outline: none; */
-    min-width: 100px;
     border: 1px solid var(--border-color);
     color: var(--text-color);
-    /* transition: border 0.3s; */
-    font-family: var(--body-font);
+    transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-.input:active, .input:focus, .input:focus-within{
+.input:active, 
+.input:focus, 
+.input:focus-within {
     border: 1px solid var(--input-hover-bd-color) !important;
 }
 
-.carousel-container {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    max-width: 800px;
-}
-  
-.carousel {
-    display: inline-block;
-    animation: scroll 10s linear infinite;
-}
-  
-.carousel-img {
-    display: inline-block;
-    margin: 0 20px;
-}
-  
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-.footer-link{
+/* Footer links */
+.footer-link {
     color: var(--secondary-text-color);
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
-.footer-link:hover{
+.footer-link:hover {
     color: var(--primary-text-color);
 }
 
-
-/* Style for the collapsible content such as faq commonly known as: accordion */
-
+/* FAQ accordion */
 .faq-accordion {
-    background-color: inherit;
     color: var(--text-color);
-    cursor: pointer;
-    padding: 15px 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    transition: height 0.4s;
+    transition: color 0.3s ease;
 }
 
 .faq .content {
-    padding: 0px 18px;
     color: var(--secondary-text-color);
-    height: max-content;
-    overflow: hidden;
-    background-color: transparent;
-    text-align: justify;
-    max-height: 0px;
-    transition: max-height 0.4s, padding 0.4s;
+    transition: color 0.3s ease;
 }
 
 .faq-accordion.active,
 .faq-accordion:hover {
-    color: #FDB51B;
+    color: var(--brand-color);
 }
 
-.faq-accordion i {
-    transition: transform 0.3s ease;
-}
-
-.faq-accordion.active i {
-    transform: rotate(45deg);
-}
-
-/* Theme toggle button styles */
-.theme-toggle-wrapper {
-    margin: 0 10px;
-}
-
-.theme-toggle-button {
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    font-family: var(--body-font);
-    font-weight: 500;
-}
-
-.theme-toggle-button:hover {
-    transform: translateY(-2px);
-}
-
-.theme-toggle-button:focus {
-    outline: 2px solid var(--primary-text-color);
-    outline-offset: 2px;
-}
-
-.mode-icon {
-    transition: all 0.3s ease;
-}
-
-/* Light mode adjustments to ensure visibility */
-[data-theme="light"] .bi-list {
-    color: var(--text-color);
-}
-
-/* Set theme-specific focus styles */
-.themeSwitcherTwo:focus-within {
-    outline: 2px solid #FDB51B;
-    outline-offset: 2px;
-}
-
-/* Mobile menu styles */
+/* Mobile navigation */
 @media not all and (min-width: 1024px) {
     header .collapsible-header {
-        position: fixed;
-        right: 0px;
-        flex-direction: column;
-        opacity: 0;
-        height: 100vh;
-        min-height: 100vh;
-        height: 100dvh;
-        width: 0vw;
-        justify-content: space-between;
-        padding: 5px;
-        padding-top: 5%;
-        padding-bottom: 5%;
-        place-items: end;
         background-color: var(--card-bg);
         color: var(--text-color);
-        overflow-y: auto;
         box-shadow: 3px 0px 3px 2px var(--shadow-color);
-    }
-
-    .header-links{
-        color: var(--text-color);
-    }
-    
-    /* Adjust theme toggle layout on mobile */
-    .theme-toggle-wrapper {
-        margin: 15px 0;
+        transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
 }
 
-/* Dark mode adjustments for images and graphics */
+/* Image adjustments for light mode */
 [data-theme="light"] img.tw-grayscale {
-    filter: grayscale(100%) brightness(0.8);
+    filter: grayscale(100%) brightness(0.7) contrast(1.2);
+    transition: filter 0.3s ease;
 }
 
 [data-theme="light"] img.tw-grayscale:hover {
-    filter: grayscale(0%) brightness(1);
+    filter: grayscale(0%) brightness(1) contrast(1);
 }
 
-/* Ensure mobile nav button is visible in light mode */
-[data-theme="light"] #collapse-btn {
+/* Mobile navigation button */
+#collapse-btn {
     color: var(--text-color);
+    transition: color 0.3s ease;
 }

@@ -1,7 +1,68 @@
 // Wait for components to load before initializing
-document.addEventListener('componentsLoaded', () => {
-    initializeApp();
+document.addEventListener('DOMContentLoaded', () => {
+    // Load components first
+    loadComponents().then(() => {
+        console.log("Components loaded, initializing app...");
+        initializeApp();
+    });
 });
+
+// Function to load components manually
+async function loadComponents() {
+    // Find all component placeholders
+    const componentPlaceholders = document.querySelectorAll('[data-component]');
+    const promises = [];
+    
+    for (const placeholder of componentPlaceholders) {
+        const componentPath = placeholder.getAttribute('data-component');
+        
+        // Create a promise for each component
+        const promise = fetch(`${componentPath}?v=${new Date().getTime()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                placeholder.innerHTML = html;
+                
+                // Execute any scripts inside the component
+                const scripts = placeholder.querySelectorAll('script');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    
+                    if (script.src) {
+                        newScript.src = script.src;
+                    } else {
+                        newScript.textContent = script.textContent;
+                    }
+                    
+                    // Copy other attributes
+                    Array.from(script.attributes).forEach(attr => {
+                        if (attr.name !== 'src') {
+                            newScript.setAttribute(attr.name, attr.value);
+                        }
+                    });
+                    
+                    // Replace the old script with the new one
+                    script.parentNode.replaceChild(newScript, script);
+                });
+            })
+            .catch(error => {
+                console.error(`Error loading component ${componentPath}:`, error);
+                placeholder.innerHTML = `<div class="tw-p-4">Failed to load component: ${componentPath}</div>`;
+            });
+            
+        promises.push(promise);
+    }
+    
+    // Wait for all components to load
+    await Promise.all(promises);
+    
+    // Dispatch event when all components are loaded
+    document.dispatchEvent(new CustomEvent('componentsLoaded'));
+}
 
 function initializeApp() {
     // initialization
@@ -49,11 +110,37 @@ function initializeApp() {
     
     window.addEventListener("resize", responsive);
     
+    // Initialize the theme toggle
+    initThemeToggle();
+    
     // Initialize FAQ accordions
     initFaqAccordion();
     
     // Initialize animations
     initAnimations();
+}
+
+function initThemeToggle() {
+    // Get the theme toggle element
+    const themeToggle = document.getElementById('themeSwitcherOne');
+    
+    if (themeToggle) {
+        console.log("Theme toggle found, initializing...");
+        
+        // Set initial state based on current theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        themeToggle.checked = (currentTheme === 'light');
+        
+        // Add event listener
+        themeToggle.addEventListener('change', function() {
+            const newTheme = this.checked ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            console.log(`Theme switched to ${newTheme}`);
+        });
+    } else {
+        console.error("Theme toggle element not found!");
+    }
 }
 
 function initFaqAccordion() {
@@ -125,9 +212,4 @@ function initAnimations() {
             stagger: 0.2,
         });
     });
-}
-
-// If components are already loaded when this script runs, initialize immediately
-if (document.querySelectorAll('[data-component]').length === 0) {
-    initializeApp();
 }
