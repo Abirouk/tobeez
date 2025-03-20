@@ -168,20 +168,15 @@ function initAnimations() {
     // Initial state for reveal-up elements
     gsap.set(".reveal-up", {
         opacity: 0,
-        y: "100px",
+        y: "50px", // Reduced from 100px for more subtle animation
     });
 
-    // Dashboard animation
-    gsap.to("#dashboard", {
-        scale: 1,
-        translateY: 0,
+    // Phone mockup animation
+    gsap.to(".phone-mockup-container", {
+        rotateY: "0deg",
         rotateX: "0deg",
-        scrollTrigger: {
-            trigger: "#hero-section",
-            start: "top 80%",
-            end: "bottom bottom",
-            scrub: 1,
-        }
+        duration: 1.5,
+        ease: "power2.out",
     });
 
     // Section reveal animations

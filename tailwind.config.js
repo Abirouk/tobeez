@@ -41,6 +41,15 @@ module.exports = {
 				'header': ['Godber', 'sans-serif'],
 				'body': ['Raleway', 'sans-serif'],
 			},
+			width: {
+				'1/2': '50%', 
+			},
+			dropShadow: {
+				'2xl': '0 25px 25px rgba(0, 0, 0, 0.25)',
+			},
+			inset: {
+				'1/2': '50%',
+			},
 		},
 	},
 	plugins: [],
