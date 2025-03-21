@@ -1,59 +1,73 @@
-<section class="hero-section" id="hero-section">
-    <!-- Background with overlay -->
-    <div class="hero-background">
-        <div class="hero-overlay"></div>
-        <img src="./assets/images/home/people-background.jpg" alt="Background" />
+<section class="hero-section tw-relative tw-min-h-screen tw-w-full tw-flex tw-flex-col tw-justify-center" id="hero-section">
+    <!-- Hero background with overlay -->
+    <div class="hero-background tw-absolute tw-inset-0 tw-z-0">
+        <div class="hero-overlay tw-absolute tw-inset-0"></div>
+        <img src="./assets/images/home/people-background.jpg" alt="Background" class="tw-h-full tw-w-full tw-object-cover" />
     </div>
 
-    <!-- Content container -->
-    <div class="hero-content">
-        <div class="hero-text">
-            <h1>Digitizing The<br>Traditional Trade Market</h1>
-            <p>
-                Tobeez is a fast-growing B2B E-commerce marketplace. Bringing
-                the marketplace online, Tobeez connects buyers and sellers across the
-                supply chain. These ties grant merchants efficient and profitable growth, so
-                we can all grow equally.
-            </p>
-            <div class="hero-buttons">
-                <a href="#" class="store-button app-store">
-                    <span class="store-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path d="M17.9,10.9C17.9,9,19.3,7.9,20.6,7.4C19.7,6.2,18.3,5.5,16.9,5.5C15.1,5.4,13.4,6.7,12.5,6.7C11.6,6.7,10.1,5.5,8.7,5.5C6.7,5.5,4.7,7,3.6,9.2C2,12.5,3.1,18,4.6,20.9C5.4,22.4,6.3,24,7.6,24C8.8,24,9.3,23,10.7,23C12.1,23,12.5,24,13.7,24C15,24,15.8,22.5,16.6,21.1C17.5,19.5,17.9,18,17.9,17.9C17.8,17.8,15.3,16.9,15.3,14C15.3,12.1,16.4,11.1,16.4,11.1C15.5,9.7,14,9.6,13.6,9.6C11.9,9.5,10.6,10.9,9.9,10.9C9.2,10.9,8.1,9.8,6.6,9.8C5.2,9.8,4,10.7,3.2,12C3.1,12,5.1,22,12,22"></path>
-                            <path d="M13.1,3.1C13.8,2.2,14.9,1.7,15.9,1.7C16,2.7,15.6,3.8,14.9,4.7C14.2,5.6,13.2,6.2,12.1,6.1C12,5.1,12.5,4,13.1,3.1"></path>
-                        </svg>
-                    </span>
-                    <span class="store-text">
-                        <span class="small-text">Download on the</span>
-                        <span class="big-text">App Store</span>
-                    </span>
-                </a>
-                <a href="#" class="store-button play-store">
-                    <span class="store-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                            <path d="M3.61108 2.99571C3.61108 2.99571 3.61108 6.17751 3.61108 9.3241C3.61108 12.4707 3.61108 15.6177 3.61108 15.6177C3.61108 15.6177 19.8055 9.30659 19.8055 9.30659C19.8055 9.30659 3.61108 2.99571 3.61108 2.99571Z" fill="#EA4335"></path>
-                            <path d="M3.61108 15.6178C3.61108 15.6178 3.61108 18.7996 3.61108 21.0044C3.61108 21.0044 15.1232 9.78648 19.8056 9.3066C19.8056 9.3066 3.61108 15.6178 3.61108 15.6178Z" fill="#FBBC04"></path>
-                            <path d="M19.8056 9.30664C15.1232 9.78652 3.61108 21.0044 3.61108 21.0044C3.61108 21.0044 14.4736 14.6755 19.8056 9.30664Z" fill="#34A853"></path>
-                            <path d="M19.8055 9.30659C14.4735 14.6755 3.61099 21.0043 3.61099 21.0043C3.61099 21.0043 3.61099 12.4707 3.61099 9.32409C3.61099 6.1775 3.61099 2.9957 3.61099 2.9957C3.61099 2.9957 19.8055 9.30659 19.8055 9.30659Z" fill="#4285F4"></path>
-                        </svg>
-                    </span>
-                    <span class="store-text">
-                        <span class="small-text">GET IT ON</span>
-                        <span class="big-text">Google Play</span>
-                    </span>
-                </a>
+    <!-- Main content container -->
+    <div class="tw-container tw-mx-auto tw-relative tw-z-10 tw-flex tw-flex-col tw-justify-center tw-py-16">
+        <!-- Hero Content -->
+        <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-justify-between tw-gap-8">
+            <!-- Left content (text) -->
+            <div class="reveal-up tw-flex tw-flex-col tw-z-10 tw-max-w-[600px]">
+                <h1 class="tw-text-4xl lg:tw-text-5xl xl:tw-text-6xl tw-font-bold tw-text-white tw-mb-6" style="font-family: var(--header-font);">
+                    Digitizing The<br>
+                    Traditional Trade Market
+                </h1>
+                
+                <p class="tw-text-white tw-opacity-90 tw-text-lg tw-mb-8 tw-max-w-[90%]">
+                    Tobeez is a fast-growing B2B E-commerce marketplace. Bringing
+                    the marketplace online, Tobeez connects buyers and sellers across the
+                    supply chain. These ties grant merchants efficient and profitable growth, so
+                    we can all grow equally.
+                </p>
+                
+                <!-- App store buttons -->
+                <div class="tw-flex tw-gap-4 tw-mt-4">
+                    <a href="#" class="store-button tw-flex tw-items-center tw-gap-2 tw-bg-black tw-text-white tw-rounded-md tw-transition-all">
+                        <div class="tw-flex tw-items-center tw-justify-center tw-w-8 tw-h-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tw-w-6 tw-h-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.9,10.9C17.9,9,19.3,7.9,20.6,7.4C19.7,6.2,18.3,5.5,16.9,5.5C15.1,5.4,13.4,6.7,12.5,6.7C11.6,6.7,10.1,5.5,8.7,5.5C6.7,5.5,4.7,7,3.6,9.2C2,12.5,3.1,18,4.6,20.9C5.4,22.4,6.3,24,7.6,24C8.8,24,9.3,23,10.7,23C12.1,23,12.5,24,13.7,24C15,24,15.8,22.5,16.6,21.1C17.5,19.5,17.9,18,17.9,17.9C17.8,17.8,15.3,16.9,15.3,14C15.3,12.1,16.4,11.1,16.4,11.1C15.5,9.7,14,9.6,13.6,9.6C11.9,9.5,10.6,10.9,9.9,10.9C9.2,10.9,8.1,9.8,6.6,9.8C5.2,9.8,4,10.7,3.2,12C3.1,12,5.1,22,12,22"></path>
+                                <path d="M13.1,3.1C13.8,2.2,14.9,1.7,15.9,1.7C16,2.7,15.6,3.8,14.9,4.7C14.2,5.6,13.2,6.2,12.1,6.1C12,5.1,12.5,4,13.1,3.1"></path>
+                            </svg>
+                        </div>
+                        <div class="tw-flex tw-flex-col tw-text-left">
+                            <span class="tw-text-xs tw-font-normal">Download on the</span>
+                            <span class="tw-text-sm tw-font-semibold">App Store</span>
+                        </div>
+                    </a>
+                    <a href="#" class="store-button tw-flex tw-items-center tw-gap-2 tw-bg-black tw-text-white tw-rounded-md tw-transition-all">
+                        <div class="tw-flex tw-items-center tw-justify-center tw-w-8 tw-h-8">
+                            <svg class="tw-w-6 tw-h-6" viewBox="0 0 24 24">
+                                <path d="M3.61108 2.99571C3.61108 2.99571 3.61108 6.17751 3.61108 9.3241C3.61108 12.4707 3.61108 15.6177 3.61108 15.6177C3.61108 15.6177 19.8055 9.30659 19.8055 9.30659C19.8055 9.30659 3.61108 2.99571 3.61108 2.99571Z" fill="#EA4335"></path>
+                                <path d="M3.61108 15.6178C3.61108 15.6178 3.61108 18.7996 3.61108 21.0044C3.61108 21.0044 15.1232 9.78648 19.8056 9.3066C19.8056 9.3066 3.61108 15.6178 3.61108 15.6178Z" fill="#FBBC04"></path>
+                                <path d="M19.8056 9.30664C15.1232 9.78652 3.61108 21.0044 3.61108 21.0044C3.61108 21.0044 14.4736 14.6755 19.8056 9.30664Z" fill="#34A853"></path>
+                                <path d="M19.8055 9.30659C14.4735 14.6755 3.61099 21.0043 3.61099 21.0043C3.61099 21.0043 3.61099 12.4707 3.61099 9.32409C3.61099 6.1775 3.61099 2.9957 3.61099 2.9957C3.61099 2.9957 19.8055 9.30659 19.8055 9.30659Z" fill="#4285F4"></path>
+                            </svg>
+                        </div>
+                        <div class="tw-flex tw-flex-col tw-text-left">
+                            <span class="tw-text-xs tw-font-normal">GET IT ON</span>
+                            <span class="tw-text-sm tw-font-semibold">Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right content (phone images) -->
+            <div class="reveal-up tw-relative tw-flex tw-w-full lg:tw-w-2/5 tw-justify-center lg:tw-justify-end">
+                <div class="phone-mockup-container tw-relative tw-z-10">
+                    <img src="./assets/images/home/phones-mockup.png" alt="App Mockup" class="tw-w-full tw-max-w-[450px] tw-object-contain tw-drop-shadow-2xl" />
+                </div>
+                <div class="hero-img-bg-grad tw-absolute tw-z-0"></div>
             </div>
         </div>
-        <div class="hero-phones">
-            <img src="./assets/images/home/phones-mockup.png" alt="App Mockup" />
-            <div class="hero-glow"></div>
-        </div>
     </div>
-
+    
     <!-- Wave separator -->
-    <div class="wave-separator">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,53.3C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+    <div class="wave-separator tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-z-10 tw-overflow-hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" class="tw-w-full tw-h-full">
+            <path fill="var(--bg-color)" fill-opacity="1" d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,53.3C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
         </svg>
     </div>
 </section>
